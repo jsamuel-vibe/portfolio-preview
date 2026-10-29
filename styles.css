@@ -79,11 +79,11 @@ h2, h3 { scroll-margin-top: 48px; }
   font-weight: 400;
   letter-spacing: -.025em;
 }
-.t-body { color: var(--muted); font-weight: 400; font-size: 18px; line-height: 1.55; text-wrap: pretty; }
-.page :is(h2, h3).t-h16 { font-size: 20px; line-height: 1.25; }
+.t-body { color: var(--muted); font-weight: 400; font-size: 18px; line-height: 1.3; text-wrap: pretty; }
+.page :is(h2, h3).t-h16 { font-size: 28px; line-height: 1.15; }
 .t-title { font-weight: 500; font-size: 20px; line-height: 1.2; }
-.t-display { font-weight: 500; font-size: clamp(30px, 3.6vw, 40px); line-height: 1.1; text-wrap: balance; }
-.t-h24 { font-weight: 500; font-size: 24px; line-height: 1.25; text-wrap: balance; }
+.t-display { font-weight: 400; font-size: clamp(40px, 4.2vw, 48px); line-height: 1.04; text-wrap: balance; }
+.t-h24 { font-weight: 500; font-size: 28px; line-height: 1.15; text-wrap: balance; }
 .t-h16 { font-weight: 500; font-size: 16px; line-height: 1.35; }
 .t-small { font-weight: 400; font-size: 14px; line-height: 1.2; }
 .t-num { color: var(--faint); font-weight: 400; font-size: 32px; line-height: 1; white-space: nowrap; }
@@ -98,7 +98,7 @@ h2, h3 { scroll-margin-top: 48px; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   height: 40px; padding: 0 16px; border: 0; border-radius: 999px;
-  font-family: var(--font); font-weight: 500; font-size: 14px; letter-spacing: -0.02em; line-height: 1;
+  font-family: var(--font); font-weight: 500; font-size: 18px; letter-spacing: -0.02em; line-height: 1;
   white-space: nowrap; cursor: pointer;
   transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease, color .2s ease;
 }
@@ -107,7 +107,7 @@ h2, h3 { scroll-margin-top: 48px; }
 .btn-primary:hover, a:hover .btn-primary { background: var(--ink-hover); }
 .btn-secondary { background: var(--white); color: var(--ink); box-shadow: 0 0 0 1px var(--hairline), 0 1px 2px rgba(0, 0, 0, .06); }
 .btn-secondary:hover { box-shadow: 0 0 0 1px rgba(17, 17, 17, .16), 0 2px 6px rgba(0, 0, 0, .08); }
-.btn-sm { height: 34px; padding: 0 14px; font-size: 13px; gap: 6px; }
+.btn-sm { height: 36px; padding: 0 14px; font-size: 18px; gap: 6px; }
 .btn:active { transform: translateY(1px); }
 a:hover .btn-icon, .btn:hover .btn-icon { transform: translateX(3px); }
 a:hover .btn-icon:first-child, .btn:hover .btn-icon:first-child { transform: translateX(-3px); }
@@ -167,9 +167,9 @@ a:hover .btn-icon:first-child, .btn:hover .btn-icon:first-child { transform: tra
 .project-intro-inner .t-display { margin-bottom: 4px; }
 .meta { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; padding-top: 20px; border-top: 1px solid var(--hairline); }
 .meta > div { display: flex; flex-direction: column; gap: 6px; }
-.meta dt { color: var(--muted); font-size: 16px; line-height: 1.2; }
-.meta dd { font-weight: 400; font-size: 18px; line-height: 1.35; }
-.project-intro-inner > .t-body { font-size: 22px; line-height: 1.45; }
+.meta dt { color: var(--muted); font-size: 12px; line-height: 1.2; }
+.meta dd { font-weight: 400; font-size: 16px; line-height: 1.35; }
+.project-intro-inner > .t-body { font-size: 18px; line-height: 1.3; }
 
 /* Case study blocks */
 .label-col { flex: 1 1 200px; }
@@ -327,6 +327,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 /* Phone */
 @media (max-width: 640px) {
   :root { --block-gap: 40px; --head-gap: 28px; }
+  .t-display { font-size: clamp(38px, 9.5vw, 48px); }
   .hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "main" "sub"; row-gap: 24px; }
   .topnav { padding-top: 24px; }
   .footer-links { flex-wrap: wrap; }
@@ -496,7 +497,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 .wa-summary-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .wa-title-block > .t-body,
-.wa-summary-copy .t-body { font-size: 22px; line-height: 1.45; }
+.wa-summary-copy .t-body { font-size: 18px; line-height: 1.3; }
 .wa-project-details { margin: 0; border-top: 1px solid var(--hairline); }
 .wa-project-details > div {
   padding: 16px 0;
@@ -507,13 +508,13 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 }
 .wa-project-details dt {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.wa-project-details dd { font-size: 18px; font-weight: 400; line-height: 1.45; }
+.wa-project-details dd { font-size: 16px; font-weight: 400; line-height: 1.45; }
 .wa-kickers { display: flex; flex-wrap: wrap; gap: 6px; }
 .wa-kickers span {
   padding: 5px 8px;
