@@ -38,7 +38,6 @@
   --hairline: rgba(17, 17, 17, 0.08);
   --tip-bg: rgb(30, 30, 30);
   --device-screen: rgb(30, 30, 30);
-  --interface-landscape: url("assets/cretile-pastel-sage.webp");
   --content-width: 1180px;
 
   --font: 'Crimson Pro', Georgia, 'Times New Roman', serif;
@@ -204,21 +203,22 @@ a:hover .btn-icon:first-child, .btn:hover .btn-icon:first-child { transform: tra
   display: block;
   min-width: 0;
   margin: 0;
-  padding: clamp(16px, 3%, 32px);
+  padding: 0;
   overflow: visible;
-  border: 1px solid var(--hairline);
-  border-radius: 16px;
-  background: #e2ebe0 var(--interface-landscape) center / cover no-repeat;
+  border: 0;
+  border-radius: 0;
+  background: none;
   box-shadow: none;
 }
 .interface-viewport {
   display: block;
   position: relative;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 10px;
   background: transparent;
+  box-shadow: 0 0 0 1px var(--hairline), 0 12px 32px rgba(17, 17, 17, .1);
 }
-.next-preview.interface-stage { align-self: center; border-radius: 16px; box-shadow: none; }
+.next-preview.interface-stage { align-self: center; overflow: visible; border-radius: 0; box-shadow: none; }
 .interface-stage .interface-viewport img,
 .interface-stage .interface-viewport video {
   display: block;
@@ -479,34 +479,39 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 /* WhatsApp case study: editorial storytelling with product-led visuals */
 .wa-case { --wa-accent: #16745c; --wa-accent-soft: #eaf5f1; }
 .wa-case .project-intro-inner { max-width: 680px; }
-.wa-case .wa-project-opening { padding-top: clamp(64px, 8vw, 104px); }
-.wa-case .wa-opening-inner { max-width: none; gap: 48px; }
-.wa-opening-grid {
+.wa-case .wa-project-opening,
+.project-intro.case-project-opening { padding-top: clamp(64px, 8vw, 104px); }
+.wa-case .wa-opening-inner,
+.project-intro .case-opening-inner { max-width: none; gap: 48px; }
+.wa-opening-grid, .case-opening-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
   gap: 64px;
   align-items: start;
 }
-.wa-intro-copy { display: flex; flex-direction: column; gap: 32px; }
-.wa-summary {
+.wa-intro-copy, .case-intro-copy { display: flex; flex-direction: column; gap: 32px; }
+.case-title-block { display: flex; flex-direction: column; gap: 18px; }
+.wa-summary, .case-summary {
   padding-top: 28px;
   border-top: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
-.wa-summary-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.wa-summary-copy, .case-summary-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .wa-title-block > .t-body,
-.wa-summary-copy .t-body { font-size: 18px; line-height: 1.3; }
-.wa-project-details { margin: 0; border-top: 1px solid var(--hairline); }
-.wa-project-details > div {
+.wa-summary-copy .t-body,
+.case-title-block > .t-body,
+.case-summary-copy .t-body { font-size: 18px; line-height: 1.3; }
+.wa-project-details, .case-project-details { margin: 0; border-top: 1px solid var(--hairline); }
+.wa-project-details > div, .case-project-details > div {
   padding: 16px 0;
   border-bottom: 1px solid var(--hairline);
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.wa-project-details dt {
+.wa-project-details dt, .case-project-details dt {
   color: var(--muted);
   font-size: 12px;
   font-weight: 400;
@@ -514,7 +519,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.wa-project-details dd { font-size: 16px; font-weight: 400; line-height: 1.45; }
+.wa-project-details dd, .case-project-details dd { font-size: 16px; font-weight: 400; line-height: 1.45; }
 .wa-kickers { display: flex; flex-wrap: wrap; gap: 6px; }
 .wa-kickers span {
   padding: 5px 8px;
@@ -820,12 +825,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .wa-flow strong { font-size: 14px; font-weight: 500; line-height: 1.3; }
 
 @media (max-width: 640px) {
-  .wa-case .wa-opening-inner { gap: 32px; }
+  .wa-case .wa-opening-inner,
+  .project-intro .case-opening-inner { gap: 32px; }
   .wa-opening-grid,
-  .wa-summary-copy { grid-template-columns: minmax(0, 1fr); }
-  .wa-opening-grid { gap: 32px; }
-  .wa-intro-copy { gap: 28px; }
-  .wa-summary { padding-top: 24px; }
+  .wa-summary-copy,
+  .case-opening-grid,
+  .case-summary-copy { grid-template-columns: minmax(0, 1fr); }
+  .wa-opening-grid, .case-opening-grid { gap: 32px; }
+  .wa-intro-copy, .case-intro-copy { gap: 28px; }
+  .wa-summary, .case-summary { padding-top: 24px; }
   .wa-job-map,
   .wa-choice-grid,
   .wa-principle-grid,

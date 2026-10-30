@@ -54,7 +54,6 @@
 .wa-story-media { min-width: 0; }
 .wa-story-media-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .wa-story-media-pair > * { min-width: 0; }
-.wa-story .interface-stage { padding: clamp(16px, 2.5%, 28px); }
 .wa-story-return { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .wa-case a:focus-visible { outline: 2px solid var(--wa-accent); outline-offset: 5px; }
 
