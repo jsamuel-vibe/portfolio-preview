@@ -275,3 +275,20 @@
   });
   onScroll();
 })();
+
+// Exploration board: drafts fan out from the title the first time the board comes into view.
+(function () {
+  var board = document.querySelector('.ss-exploration-board');
+  if (!board || !('IntersectionObserver' in window)) return;
+  if (!matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)').matches) return;
+  if (board.getBoundingClientRect().top < window.innerHeight * 0.8) return;
+  board.classList.add('is-armed');
+  var io = new IntersectionObserver(function (entries) {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    board.getBoundingClientRect();
+    board.classList.replace('is-armed', 'is-entering');
+    setTimeout(function () { board.classList.remove('is-entering'); }, 2800);
+  }, { threshold: 0.3 });
+  io.observe(board);
+})();

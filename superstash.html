@@ -19,6 +19,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="assets/fonts/crimson-pro-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=20261030-case-opening">
+<link rel="stylesheet" href="superstash.css?v=20261030-legible">
 </head>
 <body>
 <main class="page">
@@ -35,21 +36,23 @@
     <header class="project-intro case-project-opening" id="overview">
       <div class="project-intro-inner case-opening-inner">
         <figure class="media-figure">
-          <div class="interface-stage"><div class="interface-viewport">
-            <img class="media" src="assets/superstash-screen.jpg" alt="The Superstash home screen, showing saved images, notes and posts in one grid" fetchpriority="high">
+          <div class="interface-stage"><div class="interface-viewport ss-hero-viewport">
+            <img class="media ss-hero-crop" src="assets/superstash-home-current.webp" width="1901" height="1015" alt="The working Superstash home screen, with a quick-note field, content-type filters and saved references" fetchpriority="high">
           </div></div>
         </figure>
         <div class="case-opening-grid">
           <div class="case-intro-copy">
             <div class="case-title-block">
-              <h1 class="t-display">Superstash: one place to save inspiration and find it again</h1>
-              <p class="t-body">I designed and built a creative library for collecting images, posts, quotes and articles, with AI-generated descriptions and tags to help find them later.</p>
+              <h1 class="t-display">Superstash: a personal knowledge library for designers</h1>
+              <p class="t-body">I designed and built a place to collect references and notes, with a longer-term goal: giving AI tools useful context from what I save, learn and think.</p>
             </div>
             <div class="case-summary">
               <h2 class="t-h16">Long story short</h2>
               <div class="case-summary-copy">
-                <p class="t-body">My references were scattered across Pinterest, screenshots, Notion, downloads and chats. I could save something in seconds, but finding it again meant remembering where I had put it. I started Superstash to bring that collection into one place.</p>
-                <p class="t-body">I shaped the visual identity, explored the interface in Figma and built the library and browser-saving experience. AI adds descriptions and tags to each save. Using it myself brought the goal into focus: a useful collection, not just effortless saving.</p>
+                <p class="t-body">My references and thoughts were scattered across different apps. I kept collecting things to learn from, but often struggled to bring that knowledge back into the work I was doing.</p>
+                <p class="t-body">I wanted Superstash to connect that collection with AI tools, helping resurface forgotten references and inform new ideas. Working solo, I started with the foundation: browser capture, a shared library for saves and notes, and AI-generated descriptions and tags.</p>
+                <p class="t-body">Using it myself made quick note-taking a priority. I chose a simpler interface that I could build sooner, with a note field directly in the gallery and compact navigation.</p>
+                <p class="t-body">The API connection remains planned. My immediate focus is fixing bugs and refining the existing UI and workflows before expanding the AI capabilities.</p>
               </div>
             </div>
           </div>
@@ -110,7 +113,7 @@
             </div>
           </div>
           <div class="stack" style="gap:24px">
-            <figure class="media-figure">
+            <figure class="media-figure ss-lowres">
               <div class="interface-stage"><div class="interface-viewport">
                 <img class="media" src="assets/superstash-hover-save-clean.webp" alt="A Save button floating over an image on hover, saving it in one click" loading="lazy">
               </div></div>
@@ -170,52 +173,70 @@
       </div>
     </section>
 
-    <section class="stack sec" style="gap:var(--head-gap)">
-      <div class="stack" style="gap:12px;max-width:560px">
-        <h2 class="t-h24">How the home screen changed</h2>
-        <p class="t-body">Before building, I tried several layouts for the home screen in Figma. Here are three of them. All of them would have worked. I chose the one at the top of this page because it was the most flexible: I can add buttons and features without changing the whole structure, and it still stays minimal.</p>
-      </div>
-      <div class="carousel" data-carousel>
-        <div class="carousel-track" tabindex="0" aria-label="Home screen versions, scroll sideways">
-          <figure class="carousel-slide media-figure">
-            <button class="zoomable interface-stage" type="button" data-lightbox="home-versions" data-caption="Version 1: Tag filters and Home / Trash tabs across the top" aria-label="Open version 1 full screen">
-              <span class="interface-viewport">
-                <img class="media" src="assets/superstash-home-v1-clean.webp" alt="Early home screen: a top bar with tag filters and Home and Trash tabs above the grid" loading="lazy">
-              </span>
-            </button>
-            <figcaption class="media-caption"><strong>Version 1</strong> · Tag filters and Home / Trash tabs across the top</figcaption>
-          </figure>
-          <figure class="carousel-slide media-figure">
-            <button class="zoomable interface-stage" type="button" data-lightbox="home-versions" data-caption="Version 2: Icon sidebar, an Add new card in the grid, sort and view options" aria-label="Open version 2 full screen">
-              <span class="interface-viewport">
-                <img class="media" src="assets/superstash-home-v2-clean.webp" alt="Early home screen: an icon sidebar, an Add new card in the grid, and sort and view options" loading="lazy">
-              </span>
-            </button>
-            <figcaption class="media-caption"><strong>Version 2</strong> · Icon sidebar, an Add new card in the grid, sort and view options</figcaption>
-          </figure>
-          <figure class="carousel-slide media-figure">
-            <button class="zoomable interface-stage" type="button" data-lightbox="home-versions" data-caption="Version 3: Text sidebar with a large search heading" aria-label="Open version 3 full screen">
-              <span class="interface-viewport">
-                <img class="media" src="assets/superstash-home-v3-clean.webp" alt="Early home screen: a text sidebar and a large Search your stash heading above the grid" loading="lazy">
-              </span>
-            </button>
-            <figcaption class="media-caption"><strong>Version 3</strong> · Text sidebar with a large search heading</figcaption>
-          </figure>
-          <figure class="carousel-slide media-figure">
-            <button class="zoomable interface-stage" type="button" data-lightbox="home-versions" data-caption="The one I built: Flexible enough to add features without changing the structure" aria-label="Open the one i built full screen">
-              <span class="interface-viewport">
-                <img class="media" src="assets/superstash-screen.jpg" alt="The home screen I built: icon sidebar, search bar and a grid of saves" loading="lazy">
-              </span>
-            </button>
-            <figcaption class="media-caption"><strong>The one I built</strong> · Flexible enough to add features without changing the structure</figcaption>
-          </figure>
+    <section class="sec ss-exploration" id="home-exploration" aria-labelledby="home-exploration-title">
+      <div class="ss-exploration-board">
+        <p class="ss-ex-lede">These drafts are the alternatives I considered, rather than a sequence of tested improvements.</p>
+        <div class="ss-ex-title">
+          <h2 id="home-exploration-title">Exploration</h2>
+          <p>Different ways to arrange navigation, search and the collection.</p>
         </div>
-        <div class="carousel-controls">
-          <button class="btn btn-secondary btn-round" type="button" data-prev aria-label="Previous version"><span aria-hidden="true">←</span></button>
-          <span class="carousel-count t-small muted" aria-live="polite">1 / 4</span>
-          <button class="btn btn-secondary btn-round" type="button" data-next aria-label="Next version"><span aria-hidden="true">→</span></button>
-        </div>
+        <svg class="ss-ex-trail" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path vector-effect="non-scaling-stroke" d="M29 16C34 24 37 25 42.5 22.6C50 19 52 11 60 13.6C66 16 67 25 73 23.6C80 22 86 27 85 36.6C84 46 78 50 71 48.6C64 47 82 62 75.2 72C70 80 60 64 55 71.6C50 79 40 70 35 74.6C30 79 26 74 22 78.6"/></svg>
+        <p class="ss-ex-note ss-ex-note-a" aria-hidden="true">filters inside search?</p>
+        <p class="ss-ex-note ss-ex-note-c" aria-hidden="true">tabs on top?</p>
+        <p class="ss-ex-note ss-ex-note-e" aria-hidden="true">no sidebar at all?</p>
+        <p class="ss-ex-note ss-ex-note-d" aria-hidden="true">more editorial?</p>
+        <p class="ss-ex-note ss-ex-note-i" aria-hidden="true">a full sidebar?</p>
+        <button class="zoomable ss-ex ss-ex-a" type="button" data-lightbox="home-explorations" data-caption="Exploration: Search with tag chips, and sorting and grid size tucked into a menu." aria-label="Open exploration full screen: Superstash draft with search chips, tag filters and an open menu for sorting and grid size">
+          <img class="media" src="assets/superstash-explore-search-menu.webp" width="1600" height="1133" alt="Superstash draft with search chips, tag filters and an open menu for sorting and grid size" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-b" type="button" data-lightbox="home-explorations" data-caption="Exploration: A labelled sidebar with an All Saves heading and a sort control." aria-label="Open exploration full screen: Superstash draft with a labelled sidebar, an All Saves heading and a Newest first sort control">
+          <img class="media" src="assets/superstash-explore-sidebar-sort.webp" width="1600" height="1007" alt="Superstash draft with a labelled sidebar, an All Saves heading and a Newest first sort control" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-c" type="button" data-lightbox="home-explorations" data-caption="Exploration: Several ways to put Home, Collections and Trash across the top." aria-label="Open exploration full screen: Superstash draft comparing several tab styles for Home, Collections and Trash above the gallery">
+          <img class="media" src="assets/superstash-explore-top-tabs.webp" width="1600" height="1007" alt="Superstash draft comparing several tab styles for Home, Collections and Trash above the gallery" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-d" type="button" data-lightbox="home-explorations" data-caption="Exploration: A large serif search heading with a minimal sidebar." aria-label="Open exploration full screen: Superstash draft with a large Search your stash heading, serif text and a minimal sidebar">
+          <img class="media" src="assets/superstash-explore-editorial.webp" width="1600" height="1178" alt="Superstash draft with a large Search your stash heading, serif text and a minimal sidebar" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-e" type="button" data-lightbox="home-explorations" data-caption="Exploration: No sidebar: usage, Upgrade and Add new item in the header." aria-label="Open exploration full screen: Superstash draft with no sidebar, a storage counter, Upgrade and Add new item in the header, and Home and Trash tabs">
+          <img class="media" src="assets/superstash-explore-header-usage.webp" width="1600" height="1007" alt="Superstash draft with no sidebar, a storage counter, Upgrade and Add new item in the header, and Home and Trash tabs" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-f" type="button" data-lightbox="home-explorations" data-caption="Exploration: A slim text sidebar with item counts and a Recently added heading." aria-label="Open exploration full screen: Superstash draft with a logo, a slim text sidebar with counts and a Recently added heading">
+          <img class="media" src="assets/superstash-explore-logo-sidebar.webp" width="1600" height="1007" alt="Superstash draft with a logo, a slim text sidebar with counts and a Recently added heading" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-g" type="button" data-lightbox="home-explorations" data-caption="Exploration: A compact icon rail with tag shortcuts above the gallery." aria-label="Open exploration full screen: Superstash draft with a compact icon rail, tag shortcuts and a Newest first sort control">
+          <img class="media" src="assets/superstash-explore-icon-rail.webp" width="1600" height="1007" alt="Superstash draft with a compact icon rail, tag shortcuts and a Newest first sort control" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-h" type="button" data-lightbox="home-explorations" data-caption="Exploration: The labelled sidebar, with an active search that can be cleared." aria-label="Open exploration full screen: Superstash draft with a labelled sidebar and an active search field with a clear button">
+          <img class="media" src="assets/superstash-explore-sidebar-clear.webp" width="1600" height="1007" alt="Superstash draft with a labelled sidebar and an active search field with a clear button" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-i" type="button" data-lightbox="home-explorations" data-caption="Exploration: A full-height sidebar with counts, search and tag filters." aria-label="Open exploration full screen: Superstash draft with a full-height sidebar showing counts, search and tag filters">
+          <img class="media" src="assets/superstash-explore-sidebar-tags.webp" width="1600" height="1007" alt="Superstash draft with a full-height sidebar showing counts, search and tag filters" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-j" type="button" data-lightbox="home-explorations" data-caption="Exploration: A header layout with a long row of tag filters." aria-label="Open exploration full screen: Superstash draft with search and Add new item in the header and a long row of tag filters">
+          <img class="media" src="assets/superstash-explore-header-tags.webp" width="1600" height="1007" alt="Superstash draft with search and Add new item in the header and a long row of tag filters" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-k" type="button" data-lightbox="home-explorations" data-caption="Exploration: The sidebar with Collections promoted to a heading." aria-label="Open exploration full screen: Superstash draft with Collections as a sidebar heading above Home and Trash">
+          <img class="media" src="assets/superstash-explore-sidebar-collections.webp" width="1600" height="1007" alt="Superstash draft with Collections as a sidebar heading above Home and Trash" loading="lazy">
+        </button>
+        <button class="zoomable ss-ex ss-ex-l" type="button" data-lightbox="home-explorations" data-caption="Exploration: The header layout with tag filters under search." aria-label="Open exploration full screen: Superstash draft with a header, Home and Trash tabs, a grid-size slider and tag filters">
+          <img class="media" src="assets/superstash-explore-header-usage-tags.webp" width="1600" height="1007" alt="Superstash draft with a header, Home and Trash tabs, a grid-size slider and tag filters" loading="lazy">
+        </button>
       </div>
+      <div class="ss-home-decision">
+        <h3 class="t-h24">A smaller first release, built around quick capture</h3>
+        <p class="t-body">Quick note-taking became a priority through using Superstash myself. I brought a note field directly into the gallery, keeping it immediately available without letting it dominate the collection.</p>
+        <p class="t-body">I chose a compact icon rail instead of an expanded sidebar, and kept the product centred on the main workspace and settings. This was a simpler version to build, with fewer screens to design and maintain.</p>
+        <p class="t-body">I preferred the visual polish of some earlier explorations. For this release, I chose to get a useful version working sooner and leave further refinement for later.</p>
+      </div>
+      <figure class="media-figure ss-home-final">
+        <button class="zoomable interface-stage" type="button" data-lightbox="home-explorations" data-caption="The working version: quick notes in the gallery, content-type filters and a compact navigation rail." aria-label="Open the working Superstash home screen full screen">
+          <span class="interface-viewport">
+            <img class="media" src="assets/superstash-home-current.webp" width="1901" height="1015" alt="The working Superstash home screen with a New quick note field in the gallery, content-type filters, search and a compact icon rail" loading="lazy">
+          </span>
+        </button>
+        <figcaption class="media-caption">The working version. Quick notes sit alongside saved references in the main workspace.</figcaption>
+      </figure>
     </section>
 
     <section class="stack sec" style="gap:var(--head-gap)">
@@ -312,6 +333,6 @@
 
   </div>
 </main>
-<script src="site.js"></script>
+<script src="site.js?v=20261030-board"></script>
 </body>
 </html>
