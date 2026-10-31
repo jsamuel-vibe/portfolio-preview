@@ -533,12 +533,14 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .project-intro .case-opening-inner { max-width: none; gap: 48px; }
 .wa-opening-grid, .case-opening-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 280px);
+  grid-template-columns: minmax(0, 1fr);
   gap: 64px;
   align-items: start;
 }
 .wa-intro-copy, .case-intro-copy { display: flex; flex-direction: column; gap: 32px; }
 .case-title-block { display: flex; flex-direction: column; gap: 18px; }
+/* The details row spans the page, so the title keeps the measure it had beside the old sidebar. */
+.wa-title-block, .case-title-block { max-width: 760px; }
 .wa-summary, .case-summary {
   padding-top: 28px;
   border-top: 1px solid var(--hairline);
@@ -553,13 +555,26 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .wa-summary-copy .t-body,
 .case-title-block > .t-body,
 .case-summary-copy .t-body { font-size: 16px; line-height: 1.5; }
-.wa-project-details, .case-project-details { margin: 0; border-top: 1px solid var(--hairline); }
-.wa-project-details > div, .case-project-details > div {
-  padding: 16px 0;
+/* Project details run as one row between two hairlines, under the title. */
+.wa-project-details, .case-project-details {
+  margin: 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px 32px;
+}
+.wa-project-details > div, .case-project-details > div {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
+}
+/* The row's bottom hairline already opens the summary. */
+.wa-project-details + .wa-summary,
+.case-project-details + .case-summary { padding-top: 0; border-top: 0; }
+@media (max-width: 900px) {
+  .wa-project-details, .case-project-details { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 .wa-project-details dt, .case-project-details dt {
   color: var(--muted);
@@ -884,6 +899,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   .wa-opening-grid, .case-opening-grid { gap: 32px; }
   .wa-intro-copy, .case-intro-copy { gap: 28px; }
   .wa-summary, .case-summary { padding-top: 24px; }
+  .wa-project-details, .case-project-details { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 20px 0; }
   .wa-job-map,
   .wa-choice-grid,
   .wa-principle-grid,
