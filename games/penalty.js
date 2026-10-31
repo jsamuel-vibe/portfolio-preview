@@ -152,7 +152,7 @@
 
     // ---- Drawing ----
 
-    // The pitch the page ends on: soft mowing stripes, the goal line and the penalty spot.
+    // The pitch the page ends on: soft mowing stripes and the penalty spot.
     function drawGround() {
       var g = L, top = H - g.gry, i;
       ctx.save();
@@ -166,11 +166,6 @@
         ctx.fillStyle = i % 2 ? C.grassAlt : C.grass;
         ctx.fillRect(0, y0, W, y1 - y0 + 1);
       }
-      ctx.strokeStyle = C.line;
-      ctx.lineWidth = Math.max(1.5, g.gw * 0.005);
-      ctx.beginPath();
-      ctx.moveTo(0, g.gy); ctx.lineTo(W, g.gy);
-      ctx.stroke();
       ctx.restore();
       ctx.fillStyle = C.line;
       ctx.beginPath();
