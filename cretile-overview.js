@@ -98,6 +98,21 @@
     // Opt-in: each view plays its recording once, then hands over to the next, looping.
     // The active tab's line fills with the recording; pausing it pauses the cycle.
     var autoAdvance = gallery.hasAttribute('data-auto-advance') && !reducedMotion;
+
+    // Opt-in: show each panel's caption inside its tab. Hidden from assistive tech,
+    // which still reads the original caption beside the recording.
+    if (gallery.hasAttribute('data-tab-captions')) {
+      tabs.forEach(function (tab, index) {
+        var caption = panels[index].querySelector('figcaption');
+        if (!caption) return;
+        var copy = document.createElement('span');
+        copy.className = 'ss-tab-caption';
+        copy.setAttribute('aria-hidden', 'true');
+        copy.textContent = caption.textContent;
+        tab.appendChild(copy);
+      });
+      gallery.classList.add('has-tab-captions');
+    }
     var strip = gallery.querySelector('[role="tablist"]');
     var frame = 0;
     function startView(index) {

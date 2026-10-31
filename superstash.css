@@ -177,15 +177,19 @@
   .ss-built-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
 }
 
-/* Preview gallery: views listed on the left, the recording on the right.
-   Narrower screens keep the shared scrolling strip above the recording. */
+/* Preview gallery: views listed on the left, the recording on the right. The active
+   view opens to show its caption (copied in by cretile-overview.js); the caption under
+   the recording stays for screen readers. Narrower screens keep the scrolling strip. */
+.ss-tab-caption { display: none; }
 @media (min-width: 901px) {
-  .ss-preview.is-enhanced { display: grid; grid-template-columns: 220px minmax(0, 1fr); column-gap: 48px; align-items: start; }
-  .ss-preview .wa-preview-tabs { grid-column: 1; grid-row: 1; position: sticky; top: 24px; display: flex; flex-direction: column; gap: 4px; width: auto; box-shadow: none; overflow: visible; }
-  .ss-preview .wa-preview-tabs button { display: flex; align-items: baseline; gap: 16px; min-height: 40px; padding: 8px 0; text-align: left; border-bottom: 0; font-family: 'Inter', system-ui, sans-serif; font-size: 15px; white-space: normal; }
-  .ss-preview .wa-preview-tabs button::after { content: ""; flex: none; align-self: center; width: 6px; height: 6px; margin-left: 2px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); opacity: .6; transition: transform .2s ease; }
-  .ss-preview .wa-preview-tabs button[aria-selected="true"]::after { opacity: 1; transform: translateX(3px) rotate(45deg); }
+  .ss-preview.is-enhanced { display: grid; grid-template-columns: 300px minmax(0, 1fr); column-gap: 48px; align-items: start; }
+  .ss-preview .wa-preview-tabs { grid-column: 1; grid-row: 1; position: sticky; top: 24px; display: flex; flex-direction: column; gap: 0; width: auto; box-shadow: none; overflow: visible; }
+  .ss-preview .wa-preview-tabs button { display: grid; grid-template-rows: auto 0fr; min-height: 44px; padding: 12px 0 14px; text-align: left; border-bottom: 0; background: linear-gradient(var(--hairline), var(--hairline)) left bottom / 100% 1px no-repeat; font-family: 'Inter', system-ui, sans-serif; font-size: 16px; white-space: normal; transition: color .2s ease, grid-template-rows .3s ease; }
+  .ss-preview .wa-preview-tabs button[aria-selected="true"] { grid-template-rows: auto 1fr; }
+  .ss-preview .ss-tab-caption { display: block; overflow: hidden; min-height: 0; color: var(--muted); font-size: 14px; line-height: 1.45; opacity: 0; transition: opacity .3s ease; }
+  .ss-preview [aria-selected="true"] .ss-tab-caption { padding-top: 8px; opacity: 1; }
   .ss-preview .wa-preview-panel { grid-column: 2; grid-row: 1; }
+  .ss-preview.has-tab-captions .wa-preview-panel .media-caption { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 /* Auto-advance: the active tab's line fills as its recording plays (set by cretile-overview.js). */
 .ss-preview.is-auto .wa-preview-tabs button[aria-selected="true"] {
@@ -193,11 +197,12 @@
   background: linear-gradient(var(--ink), var(--ink)) left bottom / calc(var(--progress, 0) * 100%) 2px no-repeat;
 }
 @media (min-width: 901px) {
-  .ss-preview.is-auto .wa-preview-tabs button { padding: 10px 0 12px; }
   .ss-preview.is-auto .wa-preview-tabs button[aria-selected="true"] {
     background:
       linear-gradient(var(--ink), var(--ink)) left bottom / calc(var(--progress, 0) * 100%) 1.5px no-repeat,
-      linear-gradient(var(--hairline), var(--hairline)) left bottom / 100% 1.5px no-repeat;
+      linear-gradient(var(--hairline), var(--hairline)) left bottom / 100% 1px no-repeat;
   }
 }
-@media (min-width: 901px) and (prefers-reduced-motion: reduce) { .ss-preview .wa-preview-tabs button::after { transition: none; } }
+@media (min-width: 901px) and (prefers-reduced-motion: reduce) {
+  .ss-preview .wa-preview-tabs button, .ss-preview .ss-tab-caption { transition: none; }
+}
