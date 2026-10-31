@@ -11,11 +11,11 @@
 
 /* The gallery shows the interface without a decorative background. */
 .wa-preview-gallery { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
-.wa-preview-tabs { display: flex; flex-wrap: nowrap; gap: 6px; min-width: 0; width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: none; scroll-padding-inline: 6px; border-bottom: 1px solid var(--hairline); padding: 6px 0 12px; }
+.wa-preview-tabs { display: flex; flex-wrap: nowrap; gap: 32px; min-width: 0; width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: none; box-shadow: inset 0 -1px 0 var(--hairline); padding: 0; }
 .wa-preview-tabs::-webkit-scrollbar { display: none; }
-.wa-preview-tabs button { flex: 0 0 auto; white-space: nowrap; min-height: 40px; padding: 10px 15px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-family: var(--font); font-size: 18px; line-height: 1.3; letter-spacing: var(--track-sm); cursor: pointer; }
-.wa-preview-tabs button[aria-selected="true"] { background: var(--ink); color: var(--white); }
-.wa-preview-tabs button:hover { border-color: var(--hairline); }
+.wa-preview-tabs button { flex: 0 0 auto; white-space: nowrap; min-height: 44px; padding: 10px 0 12px; border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: transparent; color: var(--muted); font: inherit; font-family: var(--font); font-size: 18px; line-height: 1.3; letter-spacing: var(--track-sm); cursor: pointer; transition: color .2s ease, border-color .2s ease; }
+.wa-preview-tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
+.wa-preview-tabs button:hover { color: var(--ink); }
 .wa-preview-tabs button:focus-visible, .wa-preview-panel:focus-visible { outline: 2px solid var(--wa-accent); outline-offset: 4px; }
 .wa-preview-panel { margin: 0; gap: 12px; }
 .wa-preview-panel[hidden] { display: none; }
@@ -69,8 +69,7 @@
   .wa-story .wa-story-opening, .case-story .wa-story-opening { padding-top: 48px; }
   .wa-story-label { padding: 0; font-size: 13px; }
   .wa-learn-more.sec, .wa-story-return { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .wa-preview-tabs { width: calc(100% + 48px); margin-inline: -24px; padding-inline: 24px; scroll-padding-inline: 24px; gap: 4px; }
-  .wa-preview-tabs button { padding: 9px 12px; }
+  .wa-preview-tabs { width: calc(100% + 48px); margin-inline: -24px; padding-inline: 24px; scroll-padding-inline: 24px; gap: 24px; }
   .wa-preview-surface { border-radius: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {
