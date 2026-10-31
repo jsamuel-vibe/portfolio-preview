@@ -378,25 +378,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   .contact-email { font-size: 18px; overflow-wrap: anywhere; }
 }
 
-/* Footer game stage: an oval that plays a demo and expands in place. game-stage.js sets the height. */
-.game-stage { display: none; position: relative; width: 100%; margin-bottom: var(--block-gap); border-radius: 50%; overflow: hidden; background: #7DB956; cursor: pointer; transition: height .45s cubic-bezier(.2, .7, .2, 1), border-radius .45s cubic-bezier(.2, .7, .2, 1), transform .25s ease; -webkit-tap-highlight-color: transparent; }
+/* Footer game stage: goal, keeper and striker straight on the page, always playable. game-stage.js sets the height. */
+.game-stage { display: none; position: relative; width: 100%; margin-top: var(--block-gap); -webkit-tap-highlight-color: transparent; }
 .game-stage.is-ready { display: block; }
-.game-stage.is-open { border-radius: 24px; cursor: default; }
-.game-stage:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
-@media (hover: hover) { .game-stage.is-ready:not(.is-open):hover { transform: scale(1.01); } }
 .game-screen { position: absolute; inset: 0; }
 .game-screen canvas { display: block; width: 100%; height: 100%; touch-action: manipulation; }
-.game-cta { position: absolute; left: 50%; top: 50%; z-index: 1; transform: translate(-50%, -50%); pointer-events: none; }
-.game-stage.is-open .game-cta { display: none; }
-.game-close { display: none; position: absolute; top: 12px; right: 12px; z-index: 2; }
-.game-stage.is-open .game-close { display: inline-flex; }
-.penalty-card { position: absolute; left: 50%; top: 50%; z-index: 2; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px 28px; border-radius: 16px; background: var(--white); box-shadow: 0 8px 24px rgba(0, 0, 0, .18); cursor: default; }
-.penalty-card[hidden] { display: none; }
-.penalty-score { font-weight: 500; font-size: 20px; white-space: nowrap; }
-@media (prefers-reduced-motion: reduce) {
-  .game-stage { transition: none; }
-  .game-stage.is-ready:not(.is-open):hover { transform: none; }
-}
+.visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
 /* Optical tracking. Letter-spacing set on .page in em is converted to px at 16px and inherited,
    so big text ended up looser than body text. Each style sets its own value instead, following

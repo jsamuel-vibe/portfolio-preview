@@ -1,17 +1,15 @@
-// Penalty shootout for the footer game stage. Draws the scene on a canvas from behind the striker;
-// penalty-rules.js decides where the keeper dives and whether a shot scores.
+// Penalty kicks for the footer game stage. Draws the goal, keeper and striker on the page background,
+// seen from behind the striker; tapping the goal shoots there. penalty-rules.js decides where the
+// keeper dives and whether a shot scores.
 (function () {
   var Rules = window.PenaltyRules;
   var RUNUP = 400, FLIGHT = 500, RESULT = 1000;
   var SIDE = { left: -1, centre: 0, right: 1 };
   var C = {
-    sky: '#F6EEDF', stand: '#3E4A5C', hedge: '#4F8A3C',
-    grass: '#7DB956', grassAlt: '#72AD4C', line: '#FFFFFF',
+    frame: '#111111', net: 'rgba(17, 17, 17, .14)', ground: 'rgba(17, 17, 17, .12)', muted: 'rgba(17, 17, 17, .6)',
     keeper: '#F2683C', gloves: '#FFE14D', kit: '#1F2A44',
-    striker: '#2F5BD3', skin: '#E0A37A', hair: '#2B1D14', ink: '#111111',
-    hit: '#7DDC6A', missed: '#FF6B5A'
+    striker: '#2F5BD3', skin: '#E0A37A', hair: '#2B1D14', ink: '#111111'
   };
-  var CROWD = ['#F2683C', '#FFE14D', '#FFFFFF', '#2F5BD3', '#E86A92'];
 
   function lerp(a, b, t) { return a + (b - a) * t; }
   function ease(t) { return 1 - Math.pow(1 - t, 3); }
@@ -20,42 +18,25 @@
   GameStage.register('penalty', function (container) {
     var canvas = document.createElement('canvas');
     var ctx = canvas.getContext('2d');
-    var card = document.createElement('div');
-    card.className = 'penalty-card';
-    card.hidden = true;
-    card.setAttribute('aria-live', 'polite');
-    var score = document.createElement('p');
-    score.className = 'penalty-score';
-    var again = document.createElement('button');
-    again.type = 'button';
-    again.className = 'btn btn-primary btn-sm';
-    again.textContent = 'Play again';
-    card.append(score, again);
-    container.append(canvas, card);
+    // Screen readers hear each result; the canvas itself is decorative.
+    var live = document.createElement('p');
+    live.className = 'visually-hidden';
+    live.setAttribute('aria-live', 'polite');
+    container.append(canvas, live);
 
     var W = 0, H = 0, DPR = 1, L = null;
-    var mode = 'idle', phase = 'ready', t = 0, clock = 0;
+    var phase = 'ready', t = 0, clock = 0;
     var shot = null, results = [], history = [];
-    var raf = 0, last = 0, running = false, wasRunning = false;
+    var raf = 0, last = 0, running = false;
 
     // Scene geometry, all derived from the goal size so it scales to any stage.
     function layout() {
       var gw = Math.min(W * (W < 560 ? 0.86 : 0.6), H * 1.2);
       var gh = gw / 3;
       var gy = H * 0.58;
-      var hz = gy - gh * 0.35;
-      var dot = Math.max(2.5, gh * 0.04);
-      var crowd = [], seed = 7;
-      function rnd() { seed = (seed * 16807) % 2147483647; return seed / 2147483647; }
-      for (var row = 0; row < 3; row++) {
-        for (var x = dot; x < W; x += dot * 2.8) {
-          crowd.push({ x: x + rnd() * dot, y: hz - gh * (0.7 + row * 0.2), c: CROWD[Math.floor(rnd() * CROWD.length)] });
-        }
-      }
       return {
-        gw: gw, gh: gh, gx: (W - gw) / 2, gy: gy, hz: hz, standTop: hz - gh * 1.25,
-        bx: W / 2, by: gy + (H - gy) * 0.62, r0: gw * 0.028, r1: gw * 0.016,
-        dot: dot, crowd: crowd
+        gw: gw, gh: gh, gx: (W - gw) / 2, gy: gy,
+        bx: W / 2, by: gy + (H - gy) * 0.62, r0: gw * 0.028, r1: gw * 0.016
       };
     }
 
@@ -84,31 +65,13 @@
 
     function setPhase(p) { phase = p; t = 0; }
 
-    function reset() {
-      shot = null;
-      results = [];
-      history = [];
-      card.hidden = true;
-      setPhase('ready');
-    }
-
-    // The keeper reads the aim (history); the ball goes where it actually lands.
+    // The keeper reads the recent aims (history); the ball goes where it actually lands.
     function shoot(aim) {
-      var dive = Rules.pickDive(history, Math.random);
+      var dive = Rules.pickDive(history.slice(-Rules.SHOTS), Math.random);
       var target = Rules.scatter(aim, Math.random);
       shot = { target: target, dive: dive, outcome: Rules.resolveShot(target, dive) };
       history.push(aim);
       setPhase('runup');
-    }
-
-    function finish() {
-      shot = null;
-      setPhase('done');
-      score.textContent = Rules.scoreLine(results);
-      card.hidden = false;
-      again.focus({ preventScroll: true });
-      halt();
-      draw();
     }
 
     function update(dt) {
@@ -116,11 +79,12 @@
       if (phase === 'runup' && t >= RUNUP) {
         setPhase('flight');
       } else if (phase === 'flight' && t >= FLIGHT) {
-        if (mode === 'play') results.push(shot.outcome);
+        results.push(shot.outcome);
+        live.textContent = resultText() + ' ' + tally();
         setPhase('result');
       } else if (phase === 'result' && t >= RESULT) {
-        if (mode === 'play' && results.length === Rules.SHOTS) finish();
-        else { shot = null; setPhase('ready'); }
+        shot = null;
+        setPhase('ready');
       }
     }
 
@@ -184,34 +148,16 @@
 
     // ---- Drawing ----
 
-    function drawPitch() {
-      var g = L, i, x;
-      ctx.fillStyle = C.sky;
-      ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = C.stand;
-      ctx.fillRect(0, g.standTop, W, g.hz - g.standTop);
-      g.crowd.forEach(function (p) { ctx.fillStyle = p.c; circle(p.x, p.y, g.dot); });
-      ctx.fillStyle = C.hedge;
-      var r = g.gh * 0.16;
-      for (x = 0; x < W + r; x += r * 1.5) circle(x, g.hz - r * 0.4, r);
-      for (i = 0; i < 7; i++) {
-        var y0 = g.hz + (H - g.hz) * Math.pow(i / 7, 1.5);
-        var y1 = g.hz + (H - g.hz) * Math.pow((i + 1) / 7, 1.5);
-        ctx.fillStyle = i % 2 ? C.grassAlt : C.grass;
-        ctx.fillRect(0, y0, W, y1 - y0 + 1);
-      }
-      var y6 = g.gy + (H - g.gy) * 0.16, yb = g.gy + (H - g.gy) * 0.8;
-      ctx.strokeStyle = 'rgba(255, 255, 255, .85)';
-      ctx.lineWidth = Math.max(1.5, g.gw * 0.006);
-      ctx.lineJoin = 'round';
+    // No pitch: a faint goal line and the penalty spot are enough to stand on.
+    function drawGround() {
+      var g = L;
+      ctx.strokeStyle = C.ground;
+      ctx.lineWidth = Math.max(1.5, g.gw * 0.004);
+      ctx.lineCap = 'round';
       ctx.beginPath();
-      ctx.moveTo(0, g.gy); ctx.lineTo(W, g.gy);
-      ctx.moveTo(g.gx - g.gw * 0.22, g.gy); ctx.lineTo(g.gx - g.gw * 0.3, y6);
-      ctx.lineTo(g.gx + g.gw * 1.3, y6); ctx.lineTo(g.gx + g.gw * 1.22, g.gy);
-      ctx.moveTo(g.gx - g.gw * 0.75, g.gy); ctx.lineTo(g.gx - g.gw * 1.1, yb);
-      ctx.lineTo(g.gx + g.gw * 2.1, yb); ctx.lineTo(g.gx + g.gw * 1.75, g.gy);
+      ctx.moveTo(g.gx - g.gw * 0.3, g.gy); ctx.lineTo(g.gx + g.gw * 1.3, g.gy);
       ctx.stroke();
-      ctx.fillStyle = C.line;
+      ctx.fillStyle = C.ground;
       ctx.beginPath();
       ctx.ellipse(g.bx, g.by + g.r0 * 0.8, g.r0 * 0.5, g.r0 * 0.2, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -232,15 +178,13 @@
           else ctx.moveTo(p[0], p[1]);
         }
       }
-      ctx.fillStyle = 'rgba(255, 255, 255, .14)';
-      ctx.fillRect(g.gx, top, g.gw, g.gh);
-      ctx.strokeStyle = 'rgba(255, 255, 255, .5)';
+      ctx.strokeStyle = C.net;
       ctx.lineWidth = 1;
       ctx.beginPath();
       for (i = 0; i <= cols; i++) mesh(function (s) { return [g.gx + g.gw * i / cols, top + g.gh * s]; }, rows);
       for (j = 0; j <= rows; j++) mesh(function (s) { return [g.gx + g.gw * s, top + g.gh * j / rows]; }, cols);
       ctx.stroke();
-      ctx.strokeStyle = C.line;
+      ctx.strokeStyle = C.frame;
       ctx.lineWidth = Math.max(3, g.gw * 0.012);
       ctx.lineCap = 'round';
       ctx.beginPath();
@@ -297,7 +241,7 @@
       ctx.fillStyle = C.skin;
       leg(-0.09, swing);
       leg(0.09, s.kicked ? -0.9 : -swing);
-      ctx.fillStyle = '#FFFFFF';
+      ctx.fillStyle = C.kit;
       rrect(-0.19 * u, -0.54 * u, 0.38 * u, 0.2 * u, 0.05 * u);
       ctx.strokeStyle = C.striker;
       ctx.lineWidth = 0.09 * u;
@@ -334,28 +278,27 @@
       ctx.globalAlpha = 1;
     }
 
+    function tally() {
+      var goals = results.filter(function (r) { return r === 'goal'; }).length;
+      return goals + (goals === 1 ? ' goal' : ' goals') + ' from ' + results.length;
+    }
+
+    function resultText() {
+      return shot.outcome === 'goal' ? 'GOAL!' : shot.outcome === 'save' ? 'Saved' : 'Miss';
+    }
+
+    // Above the crossbar: how to play until the first shot, then the running tally.
     function drawHud() {
-      var r = Math.max(6, L.gh * 0.05), gap = r * 3, w = gap * (Rules.SHOTS - 1);
-      var cx = W / 2, cy = L.gy - L.gh - r * 3.2;
-      ctx.fillStyle = 'rgba(17, 17, 17, .55)';
-      rrect(cx - w / 2 - r * 2, cy - r * 1.8, w + r * 4, r * 3.6, r * 1.8);
-      for (var i = 0; i < Rules.SHOTS; i++) {
-        var x = cx - w / 2 + i * gap, res = results[i];
-        if (res) {
-          ctx.fillStyle = res === 'goal' ? C.hit : C.missed;
-          circle(x, cy, r);
-        } else {
-          ctx.strokeStyle = '#FFFFFF';
-          ctx.lineWidth = 1.5;
-          ctx.beginPath();
-          ctx.arc(x, cy, r - 0.75, 0, Math.PI * 2);
-          ctx.stroke();
-        }
-      }
+      var size = Math.max(13, Math.min(16, L.gh * 0.1));
+      ctx.fillStyle = C.muted;
+      ctx.font = '500 ' + Math.round(size) + 'px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(results.length ? tally() : 'Tap the goal to shoot', W / 2, L.gy - L.gh - size * 0.9);
     }
 
     function drawResultText(rp) {
-      var text = shot.outcome === 'goal' ? 'GOAL!' : shot.outcome === 'save' ? 'Saved' : 'Miss';
+      var text = resultText();
       var size = L.gh * 0.32 * (0.8 + 0.2 * ease(clamp01(rp * 4)));
       ctx.globalAlpha = 1 - clamp01((rp - 0.75) * 4);
       ctx.font = '600 ' + Math.round(size) + 'px Inter, sans-serif';
@@ -376,13 +319,14 @@
       var rp = phase === 'result' ? clamp01(t / RESULT) : 0;
       var b = ballState(rp);
       var inNet = shot && phase === 'result' && shot.outcome === 'goal';
-      drawPitch();
+      ctx.clearRect(0, 0, W, H);
+      drawGround();
       drawGoal(inNet ? { x: b.x, y: b.y, k: 0.4 * (1 - rp) } : null);
       if (inNet) drawBall(b);
       drawKeeper(keeperPose(diveProgress()));
       if (!inNet) drawBall(b);
       drawStriker(strikerPose());
-      if (mode === 'play') drawHud();
+      drawHud();
       if (phase === 'result') drawResultText(rp);
     }
 
@@ -409,12 +353,6 @@
       cancelAnimationFrame(raf);
     }
 
-    function play() {
-      mode = 'play';
-      reset();
-      start();
-    }
-
     // ---- Input ----
 
     function goalPoint(e) {
@@ -423,23 +361,15 @@
     }
 
     canvas.addEventListener('pointerdown', function (e) {
-      if (mode !== 'play' || phase !== 'ready' || !L) return;
+      if (phase !== 'ready' || !L) return;
       var target = goalPoint(e);
       if (target) shoot(target);
     });
     canvas.addEventListener('pointermove', function (e) {
-      canvas.style.cursor = mode === 'play' && phase === 'ready' && L && goalPoint(e) ? 'crosshair' : '';
+      canvas.style.cursor = phase === 'ready' && L && goalPoint(e) ? 'crosshair' : '';
     });
-    again.addEventListener('click', play);
 
     return {
-      // Until someone clicks, the oval is one still frame: keeper set, ball on the spot.
-      idle: function () {
-        mode = 'idle';
-        reset();
-        draw();
-      },
-      play: play,
       resize: function (w, h) {
         if (!w || !h) return;
         W = w;
@@ -450,17 +380,8 @@
         L = layout();
         draw();
       },
-      pause: function () {
-        wasRunning = running;
-        halt();
-      },
-      resume: function () {
-        if (wasRunning) start();
-      },
-      stop: function () {
-        halt();
-        card.hidden = true;
-      }
+      pause: halt,
+      resume: start
     };
   });
 })();
