@@ -90,14 +90,7 @@ h2, h3 { scroll-margin-top: 48px; }
   container-type: inline-size;
 }
 @media (max-width: 640px) { .page { --page-x: 32px; } }
-.page::before {
-  content: "";
-  position: absolute;
-  inset: 0 var(--frame-x);
-  z-index: -1;
-  border-inline: 1px solid var(--frame-line);
-  pointer-events: none;
-}
+/* Preview: no vertical frame lines; the rules still end where they were. */
 .page .site-nav,
 .container > .sec { position: relative; }
 .page .site-nav::after,
