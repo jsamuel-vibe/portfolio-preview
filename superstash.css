@@ -128,7 +128,6 @@
 .ss-built-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .ss-built-grid article { display: flex; flex-direction: column; gap: 16px; padding-top: 20px; border-top: 1px solid var(--hairline); }
 .ss-status { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
-.ss-story .wa-story-copy .t-body { line-height: 1.3; }
 .ss-story .wa-story-label { font-family: 'Inter', system-ui, sans-serif; }
 
 /* Original research, cropped without changing the artefacts. A separate board
