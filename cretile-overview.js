@@ -1,7 +1,7 @@
 (function () {
   'use strict';
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var videos = Array.from(document.querySelectorAll('.wa-case video'));
+  var videos = Array.from(document.querySelectorAll('.wa-case video, .case-study video'));
   var manuallyPaused = new WeakSet();
 
   // Native controls remain in HTML as the no-JavaScript fallback.
@@ -58,6 +58,21 @@
     }
     followLegacyLink();
     window.addEventListener('hashchange', followLegacyLink);
+  }
+
+  // Project-specific old anchors can follow a moved story without duplicating controls.
+  if (document.body.dataset.storyPage) {
+    var storyAnchors = (document.body.dataset.storyAnchors || '').split(/\s+/);
+    function followProjectStoryLink() {
+      var id;
+      try { id = decodeURIComponent(window.location.hash.slice(1)); } catch (_) { return; }
+      if (!id || storyAnchors.indexOf(id) === -1) return;
+      var destination = new URL(document.body.dataset.storyPage, window.location.href);
+      destination.hash = id;
+      window.location.replace(destination.href);
+    }
+    followProjectStoryLink();
+    window.addEventListener('hashchange', followProjectStoryLink);
   }
 
   document.querySelectorAll('[data-product-preview]').forEach(function (gallery) {

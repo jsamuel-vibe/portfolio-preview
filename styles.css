@@ -119,11 +119,21 @@ a:hover .btn-icon:first-child, .btn:hover .btn-icon:first-child { transform: tra
 .placeholder { background: var(--surface); }
 .section-heading { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .section-heading::after { content: ""; width: 94px; height: 1px; background: var(--ink); }
-.topnav { padding-top: 40px; display: flex; justify-content: space-between; align-items: center; }
-.brand { display: flex; align-items: center; gap: 12px; }
-.brand:hover { opacity: .7; }
-.brand-mark { width: 32px; height: 32px; border-radius: 10px; display: block; }
-.avatar, .brand-mark { background: var(--white) url("assets/profile.jpg") center / cover no-repeat; }
+/* Site header: the same portrait and contact button on every page. */
+.site-nav { display: flex; align-items: center; justify-content: space-between; padding-top: 48px; }
+.site-portrait-link { display: block; border-radius: 18px; transition: opacity .2s ease; }
+.site-portrait-link:hover { opacity: .7; }
+.site-portrait { display: block; width: 56px; height: 56px; border-radius: 18px; object-fit: cover; }
+.avatar { background: var(--white) url("assets/profile.jpg") center / cover no-repeat; }
+
+/* Breadcrumbs sit above a project opening. */
+.breadcrumbs { padding-top: 48px; }
+.breadcrumbs ol { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; align-items: center; row-gap: 4px; font-size: 16px; line-height: 24px; letter-spacing: var(--track-sm); color: var(--muted); }
+.breadcrumbs li + li::before { content: "/"; padding: 0 10px; color: rgba(17, 17, 17, 0.3); }
+.breadcrumbs a { color: var(--muted); transition: color .2s ease; }
+.breadcrumbs a:hover { color: var(--ink); }
+.breadcrumbs [aria-current="page"] { color: var(--ink); }
+body .breadcrumbs + .project-intro { padding-top: 56px; }
 .rule { height: 1px; background: var(--hairline); }
 
 /* Footer */
@@ -142,12 +152,12 @@ a:hover .btn-icon:first-child, .btn:hover .btn-icon:first-child { transform: tra
 /* Home: hero */
 .hero {
   padding-top: var(--section-gap);
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
-  grid-template-areas: "main ." ". sub"; row-gap: 32px; column-gap: 48px;
+  display: grid; grid-template-columns: minmax(0, 720px);
+  grid-template-areas: "main" "sub"; justify-content: start; row-gap: 24px;
 }
-.hero-main { grid-area: main; display: flex; flex-direction: column; gap: 24px; max-width: 460px; }
+.hero-main { grid-area: main; display: flex; flex-direction: column; gap: 24px; }
 .hero-title { font-weight: 500; font-size: clamp(30px, 3.4vw, 38px); line-height: 1.12; text-wrap: balance; }
-.hero-sub { grid-area: sub; }
+.hero-sub { grid-area: sub; max-width: 600px; }
 .avatar { width: 56px; height: 56px; border-radius: 18px; overflow: hidden; }
 
 /* Home: case study features */
@@ -329,7 +339,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   :root { --block-gap: 40px; --head-gap: 28px; }
   .t-display { font-size: clamp(38px, 9.5vw, 48px); }
   .hero { grid-template-columns: minmax(0, 1fr); grid-template-areas: "main" "sub"; row-gap: 24px; }
-  .topnav { padding-top: 24px; }
+  .site-nav { padding-top: 24px; }
+  .site-portrait-link, .site-portrait { width: 48px; height: 48px; border-radius: 15px; }
+  .breadcrumbs { padding-top: 32px; }
+  body .breadcrumbs + .project-intro { padding-top: 40px; }
   .footer-links { flex-wrap: wrap; }
   .footer-gosh .footer-links { gap: 32px; }
   .footer-links a { padding: 10px 0; }
@@ -499,6 +512,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   gap: 16px;
 }
 .wa-summary-copy, .case-summary-copy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+/* Superstash's four paragraphs read as one story, so they run down a single column. */
+.case-summary-copy { grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 640px; }
 .wa-title-block > .t-body,
 .wa-summary-copy .t-body,
 .case-title-block > .t-body,

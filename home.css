@@ -1,19 +1,5 @@
 /* Homepage editorial layout, using the shared heading and body fonts. */
 
-.home-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 48px;
-}
-.home-portrait {
-  display: block;
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  object-fit: cover;
-}
-
 .home-hero { padding-top: 96px; }
 .home-title {
   max-width: 600px;
@@ -74,8 +60,6 @@
   .home-project .feature-text { max-width: 620px; }
 }
 @media (max-width: 640px) {
-  .home-nav { padding-top: 24px; }
-  .home-portrait { width: 48px; height: 48px; border-radius: 15px; }
   .home-hero { padding-top: 64px; }
   .home-title { font-size: clamp(38px, 9.5vw, 48px); }
   .home-hero .hero-sub { margin-top: 24px; }

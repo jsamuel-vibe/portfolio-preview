@@ -13,6 +13,9 @@
   function mount(el) {
     var factory = factories[el.getAttribute('data-game')];
     if (!factory) return;
+    // styles.css makes the stage position: relative. If a stale cached stylesheet lacks
+    // the stage rules, stay hidden rather than spill an unstyled canvas over the footer.
+    if (getComputedStyle(el).position !== 'relative') return;
 
     var screen = document.createElement('div');
     screen.className = 'game-screen';
