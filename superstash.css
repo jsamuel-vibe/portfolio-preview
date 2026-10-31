@@ -101,8 +101,6 @@
 /* Legibility pass: show screenshots near their real size and keep small text crisp on Windows. */
 
 /* Hero: crop to the note field, filters and rail at roughly 1:1 instead of shrinking the whole screen. */
-.ss-hero-viewport { aspect-ratio: 1180 / 630; }
-.interface-stage .interface-viewport img.ss-hero-crop { width: 161%; max-width: none; }
 
 /* Headings sit above their content, so the page isn't half empty beside long sections. */
 .page .split { flex-direction: column; justify-content: flex-start; gap: var(--head-gap); }
@@ -132,9 +130,6 @@
 .ss-status { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
 .ss-story .wa-story-copy .t-body { line-height: 1.3; }
 .ss-story .wa-story-label { font-family: 'Inter', system-ui, sans-serif; }
-.ss-media-placeholder { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 20px; min-width: 0; min-height: 320px; padding: clamp(24px, 4vw, 48px); border: 1px dashed rgba(17, 17, 17, .22); border-radius: var(--radius); background: var(--surface); }
-.ss-media-placeholder > * { max-width: 640px; }
-.ss-media-kind { margin: 0; color: var(--muted); font: 400 12px/1.4 'Inter', system-ui, sans-serif; letter-spacing: .02em; }
 
 /* Original research, cropped without changing the artefacts. A separate board
    keeps the reviewed twelve-screen exploration and its animation untouched. */
@@ -181,5 +176,4 @@
 @media (prefers-reduced-motion: reduce) { .ss-research-card .zoomable { transition: none; } }
 @media (max-width: 640px) {
   .ss-built-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-  .ss-media-placeholder { min-height: 300px; }
 }
