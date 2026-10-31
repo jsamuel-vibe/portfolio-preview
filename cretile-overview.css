@@ -1,6 +1,6 @@
 /* Shared case-study layouts and controls. Existing wa-* names stay compatible. */
 .case-study { --wa-accent: var(--ink); }
-.wa-case .sec, .case-study .sec { --sec-pad: clamp(64px, 7vw, 104px); }
+.wa-case .sec, .case-study .sec { --sec-pad: clamp(128px, 14vw, 208px); }
 .wa-title-block { display: flex; flex-direction: column; gap: 18px; }
 .wa-skip { position: fixed; top: 12px; left: 24px; z-index: 100; padding: 12px 18px; border-radius: 8px; background: var(--ink); color: white; font: 14px var(--font); transform: translateY(-160%); }
 .wa-skip:focus { transform: none; }
