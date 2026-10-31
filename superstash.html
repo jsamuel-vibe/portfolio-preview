@@ -20,7 +20,7 @@
 <link rel="preload" href="assets/fonts/crimson-pro-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css?v=20261031-frame5">
 <link rel="stylesheet" href="cretile-overview.css?v=20261031-frame5">
-<link rel="stylesheet" href="superstash.css?v=20261031-ink">
+<link rel="stylesheet" href="superstash.css?v=20261031-sidetabs">
 </head>
 <body class="case-study ss-overview" id="top" data-story-page="superstash-case-study.html" data-story-anchors="home-exploration more-decisions">
 <a class="wa-skip" href="#overview">Skip to content</a>
@@ -77,13 +77,13 @@
     </section>
     <section class="sec wa-overview-section" id="preview" aria-labelledby="preview-title">
       <div class="wa-section-head"><h2 class="t-h24" id="preview-title">Take a look inside Superstash.</h2><p class="t-body">The working library, browser capture, quick notes and AI-generated descriptions. Choose a view or open a screenshot full screen.</p></div>
-      <div class="wa-preview-gallery" data-product-preview>
+      <div class="wa-preview-gallery ss-preview" data-product-preview>
         <div class="wa-preview-tabs" role="tablist" aria-label="Superstash screens and recordings">
-          <button type="button" role="tab" id="ss-tab-library" aria-controls="ss-preview-library" aria-selected="true" tabindex="0">Library</button>
-          <button type="button" role="tab" id="ss-tab-capture" aria-controls="ss-preview-capture" aria-selected="false" tabindex="-1">Browser capture</button>
-          <button type="button" role="tab" id="ss-tab-notes" aria-controls="ss-preview-notes" aria-selected="false" tabindex="-1">Quick notes</button>
-          <button type="button" role="tab" id="ss-tab-context" aria-controls="ss-preview-context" aria-selected="false" tabindex="-1">AI context</button>
-          <button type="button" role="tab" id="ss-tab-finding" aria-controls="ss-preview-finding" aria-selected="false" tabindex="-1">Finding references</button>
+          <button type="button" role="tab" id="ss-tab-library" aria-controls="ss-preview-library" aria-selected="true" tabindex="0"><span class="ss-tab-num" aria-hidden="true">1.0</span>Library</button>
+          <button type="button" role="tab" id="ss-tab-capture" aria-controls="ss-preview-capture" aria-selected="false" tabindex="-1"><span class="ss-tab-num" aria-hidden="true">1.1</span>Browser capture</button>
+          <button type="button" role="tab" id="ss-tab-notes" aria-controls="ss-preview-notes" aria-selected="false" tabindex="-1"><span class="ss-tab-num" aria-hidden="true">1.2</span>Quick notes</button>
+          <button type="button" role="tab" id="ss-tab-context" aria-controls="ss-preview-context" aria-selected="false" tabindex="-1"><span class="ss-tab-num" aria-hidden="true">1.3</span>AI context</button>
+          <button type="button" role="tab" id="ss-tab-finding" aria-controls="ss-preview-finding" aria-selected="false" tabindex="-1"><span class="ss-tab-num" aria-hidden="true">1.4</span>Finding references</button>
         </div>
         <figure class="wa-preview-panel media-figure" role="tabpanel" id="ss-preview-library" aria-labelledby="ss-tab-library" tabindex="0"><div class="wa-preview-surface"><video class="media" src="assets/superstash-real-library.mp4" poster="assets/superstash-real-library.webp" width="1920" height="1080" controls muted loop playsinline preload="metadata" aria-label="Scrolling the working Superstash library"></video></div><figcaption class="media-caption">Saved references and quick notes share the same workspace.</figcaption></figure>
         <figure class="wa-preview-panel media-figure" role="tabpanel" id="ss-preview-capture" aria-labelledby="ss-tab-capture" tabindex="0"><div class="wa-preview-surface"><video class="media" src="assets/superstash-motion-tap-save.mp4" poster="assets/superstash-motion-tap-save.webp" width="1920" height="1080" controls muted loop playsinline preload="metadata" aria-label="Tapping a picture, choosing Save to Superstash, and the picture going into Superstash"></video></div><figcaption class="media-caption">Tap a picture, choose Save to Superstash, and it goes straight into the library.</figcaption>
@@ -129,7 +129,7 @@
 
   </div>
 </main>
-<script src="cretile-overview.js?v=20261030-shared"></script>
+<script src="cretile-overview.js?v=20261031-sidetabs"></script>
 <script src="site.js?v=20261030-board"></script>
 </body>
 </html>
