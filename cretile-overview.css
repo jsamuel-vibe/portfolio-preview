@@ -72,7 +72,8 @@
   .wa-story .wa-story-opening, .case-story .wa-story-opening { padding-top: 48px; }
   .wa-story-label { padding: 0; font-size: 13px; }
   .wa-learn-more.sec, .wa-story-return { flex-direction: column; align-items: flex-start; gap: 24px; }
-  .wa-preview-tabs { width: calc(100% + 2 * var(--page-x)); margin-inline: calc(-1 * var(--page-x)); padding-inline: var(--page-x); scroll-padding-inline: var(--page-x); gap: 24px; }
+  /* The strip scrolls out to the frame lines, which sit halfway into the page margin. */
+  .wa-preview-tabs { width: calc(100% + var(--page-x)); max-width: none; margin-inline: calc(-.5 * var(--page-x)); padding-inline: calc(.5 * var(--page-x)); scroll-padding-inline: calc(.5 * var(--page-x)); gap: 24px; }
   .wa-preview-surface { border-radius: 8px; }
 }
 @media (prefers-reduced-motion: reduce) {

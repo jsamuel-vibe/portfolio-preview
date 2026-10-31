@@ -80,7 +80,7 @@ h2, h3 { scroll-margin-top: 48px; }
 .container { max-width: var(--content-width); margin: 0 auto; }
 
 /* Page frame: two vertical lines a little outside the content column,
-   crossed by full-width rules. The same rule places them on every page:
+   crossed by rules that end on them. The same rule places them on every page:
    24px under the header, then halfway into the gap above each section.
    Drawn behind the content so they never cover media. On narrow screens the
    vertical lines sit halfway between the screen edge and the content. */
@@ -101,11 +101,17 @@ h2, h3 { scroll-margin-top: 48px; }
 .page .site-nav,
 .container > .sec { position: relative; }
 .page .site-nav::after,
-.container > .sec::before {
+.container > .sec::before,
+.wa-project-details::before, .case-project-details::before,
+.wa-project-details::after, .case-project-details::after {
   content: "";
   position: absolute;
-  left: calc(50% - 50vw);
-  width: 100vw;
+  /* Rules end on the two vertical frame lines, never past them. cqw is the
+     page's content width, so the page edge sits a further --page-x outside it.
+     Measured from the column's left edge, so narrower sections still line up. */
+  --half-frame: calc(50cqw + var(--page-x) - max(var(--page-x) / 2, (100cqw + 2 * var(--page-x) - var(--content-width)) / 2 - 40px));
+  left: calc(min(100cqw, var(--content-width)) / 2 - var(--half-frame));
+  width: calc(2 * var(--half-frame));
   height: 1px;
   background: var(--frame-line);
   pointer-events: none;
@@ -565,19 +571,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 20px 32px;
-}
-.wa-project-details::before, .case-project-details::before,
-.wa-project-details::after, .case-project-details::after {
-  content: "";
-  position: absolute;
-  /* Spans exactly between the two vertical frame lines: cqw is the page's
-     content width, so the page edge sits a further --page-x outside it. */
-  --half-frame: calc(50cqw + var(--page-x) - max(var(--page-x) / 2, (100cqw + 2 * var(--page-x) - var(--content-width)) / 2 - 40px));
-  left: calc(50% - var(--half-frame));
-  width: calc(2 * var(--half-frame));
-  height: 1px;
-  background: var(--frame-line);
-  pointer-events: none;
 }
 .wa-project-details::before, .case-project-details::before { top: 0; }
 .wa-project-details::after, .case-project-details::after { bottom: 0; }
