@@ -65,8 +65,38 @@ h2, h3 { scroll-margin-top: 48px; }
   min-height: 100vh;
   padding: 0 24px;
   overflow-x: clip;
+  position: relative;
+  isolation: isolate;
 }
 .container { max-width: var(--content-width); margin: 0 auto; }
+
+/* Page frame: two vertical lines a little outside the content column,
+   crossed by full-width rules at the main breaks (under the header, above
+   the footer). Drawn behind the content so they never cover media. */
+.page {
+  --frame-x: max(12px, (100% - var(--content-width)) / 2 - 40px);
+  --frame-line: rgba(17, 17, 17, 0.08);
+}
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0 var(--frame-x);
+  z-index: -1;
+  border-inline: 1px solid var(--frame-line);
+  pointer-events: none;
+}
+.page .site-nav { position: relative; }
+.page .site-nav::after {
+  content: "";
+  position: absolute;
+  top: calc(100% + var(--nav-rule-gap, 24px));
+  left: calc(50% - 50vw);
+  width: 100vw;
+  height: 1px;
+  background: var(--frame-line);
+  pointer-events: none;
+}
+.contact > .rule { margin-inline: calc(50% - 50vw); background: var(--frame-line); }
 
 /* Spacing */
 .sec { padding-top: var(--section-gap); }
