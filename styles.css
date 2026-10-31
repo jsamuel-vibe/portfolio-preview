@@ -12,6 +12,13 @@
   src: url('assets/fonts/inter-latin-variable.woff2') format('woff2');
 }
 @font-face {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('assets/fonts/plus-jakarta-sans-latin-variable.woff2') format('woff2');
+}
+@font-face {
   font-family: 'Crimson Pro';
   font-style: normal;
   font-weight: 200 900;
@@ -42,6 +49,7 @@
 
   --font: 'Crimson Pro', Georgia, 'Times New Roman', serif;
   --font-display: var(--font);
+  --font-sub: 'Plus Jakarta Sans', system-ui, sans-serif;
   --tracking: 0;
 
   --section-gap: clamp(96px, 12.5vw, 160px);
@@ -116,7 +124,7 @@ h2, h3 { scroll-margin-top: 48px; }
   font-weight: 400;
   letter-spacing: -.025em;
 }
-.t-body { color: var(--muted); font-weight: 400; font-size: 18px; line-height: 1.3; text-wrap: pretty; }
+.t-body { color: var(--muted); font-family: var(--font-sub); font-weight: 400; font-size: 16px; line-height: 1.3; text-wrap: pretty; }
 .page :is(h2, h3).t-h16 { font-size: 28px; line-height: 1.15; }
 .t-title { font-weight: 500; font-size: 20px; line-height: 1.2; }
 .t-display { font-weight: 400; font-size: clamp(40px, 4.2vw, 48px); line-height: 1.04; text-wrap: balance; }
@@ -216,7 +224,7 @@ body .breadcrumbs + .project-intro { padding-top: 56px; }
 .meta > div { display: flex; flex-direction: column; gap: 6px; }
 .meta dt { color: var(--muted); font-size: 12px; line-height: 1.2; }
 .meta dd { font-weight: 400; font-size: 16px; line-height: 1.35; }
-.project-intro-inner > .t-body { font-size: 18px; line-height: 1.3; }
+.project-intro-inner > .t-body { font-size: 16px; line-height: 1.3; }
 
 /* Case study blocks */
 .label-col { flex: 1 1 200px; }
@@ -544,7 +552,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .wa-title-block > .t-body,
 .wa-summary-copy .t-body,
 .case-title-block > .t-body,
-.case-summary-copy .t-body { font-size: 18px; line-height: 1.3; }
+.case-summary-copy .t-body { font-size: 16px; line-height: 1.3; }
 .wa-project-details, .case-project-details { margin: 0; border-top: 1px solid var(--hairline); }
 .wa-project-details > div, .case-project-details > div {
   padding: 16px 0;
