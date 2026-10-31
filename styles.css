@@ -378,9 +378,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
   .contact-email { font-size: 18px; overflow-wrap: anywhere; }
 }
 
-/* Footer game stage: goal, keeper and striker straight on the page, always playable. game-stage.js sets the height. */
-.game-stage { display: none; position: relative; width: 100%; margin-top: var(--block-gap); -webkit-tap-highlight-color: transparent; }
+/* Footer game stage: the page ends on the pitch. Full-bleed (.page clips the overflow), flush with the bottom.
+   game-stage.js sets the height. */
+.game-stage { display: none; position: relative; width: 100vw; margin: var(--head-gap) 0 0 calc(50% - 50vw); -webkit-tap-highlight-color: transparent; }
 .game-stage.is-ready { display: block; }
+.contact:has(.game-stage.is-ready) { padding-bottom: 0; }
 .game-screen { position: absolute; inset: 0; }
 .game-screen canvas { display: block; width: 100%; height: 100%; touch-action: manipulation; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

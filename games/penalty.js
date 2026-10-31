@@ -1,5 +1,5 @@
-// Penalty kicks for the footer game stage. Draws the goal, keeper and striker on a mound of grass
-// on the page background, seen from behind the striker; tapping the goal shoots there. penalty-rules.js decides where the
+// Penalty kicks for the footer game stage. Draws the goal, keeper and striker on a pitch that ends
+// the page, seen from behind the striker; tapping the goal shoots there. penalty-rules.js decides where the
 // keeper dives and whether a shot scores.
 (function () {
   var Rules = window.PenaltyRules;
@@ -35,10 +35,11 @@
       var gw = Math.min(W * (W < 560 ? 0.86 : 0.6), H * 1.2);
       var gh = gw / 3;
       var gy = H * 0.58;
-      // The grass is a half-ellipse rising from the bottom corners, tall enough that the posts stand on it.
-      var gry = (H - gy + gh * 0.08) / Math.sqrt(1 - Math.pow(gw / W, 2));
+      // The grass is a wide, gentle dome that runs off both edges, tall enough that the posts stand on it.
+      var grx = Math.max(W * 0.75, gw * 1.2);
+      var gry = (H - gy + gh * 0.08) / Math.sqrt(1 - Math.pow(gw / 2 / grx, 2));
       return {
-        gw: gw, gh: gh, gx: (W - gw) / 2, gy: gy, gry: gry,
+        gw: gw, gh: gh, gx: (W - gw) / 2, gy: gy, grx: grx, gry: gry,
         bx: W / 2, by: gy + (H - gy) * 0.62, r0: gw * 0.028, r1: gw * 0.016
       };
     }
@@ -151,12 +152,12 @@
 
     // ---- Drawing ----
 
-    // A mound of grass on the page: soft mowing stripes, the goal line and the penalty spot.
+    // The pitch the page ends on: soft mowing stripes, the goal line and the penalty spot.
     function drawGround() {
       var g = L, top = H - g.gry, i;
       ctx.save();
       ctx.beginPath();
-      ctx.ellipse(W / 2, H, W / 2, g.gry, 0, Math.PI, Math.PI * 2);
+      ctx.ellipse(W / 2, H, g.grx, g.gry, 0, Math.PI, Math.PI * 2);
       ctx.closePath();
       ctx.clip();
       for (i = 0; i < 6; i++) {
@@ -170,12 +171,6 @@
       ctx.beginPath();
       ctx.moveTo(0, g.gy); ctx.lineTo(W, g.gy);
       ctx.stroke();
-      // Fade the flat bottom edge into the page rather than cutting it off.
-      var fade = ctx.createLinearGradient(0, H - (H - g.gy) * 0.35, 0, H);
-      fade.addColorStop(0, 'rgba(255, 255, 255, 0)');
-      fade.addColorStop(1, C.page);
-      ctx.fillStyle = fade;
-      ctx.fillRect(0, H - (H - g.gy) * 0.35, W, H);
       ctx.restore();
       ctx.fillStyle = C.line;
       ctx.beginPath();

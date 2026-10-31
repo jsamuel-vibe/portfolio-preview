@@ -1,4 +1,4 @@
-// Footer game stage: a strip on the page background where a game is always playable.
+// Footer game stage: a full-width strip at the foot of the page where a game is always playable.
 // Games call GameStage.register(name, factory); the stage owns size and lifecycle,
 // and the game owns everything inside the container it's given.
 (function () {
@@ -23,8 +23,9 @@
 
     var game = factory(screen);
 
+    // Sized from the content column, not the full-bleed stage, so wide screens don't get a giant pitch.
     function size() {
-      el.style.height = el.clientWidth / (window.innerWidth < 640 ? 1.6 : 2.4) + 'px';
+      el.style.height = el.parentElement.clientWidth / (window.innerWidth < 640 ? 1.6 : 2.4) + 'px';
     }
     window.addEventListener('resize', size);
 
