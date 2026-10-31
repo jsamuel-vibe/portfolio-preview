@@ -90,14 +90,13 @@ h2, h3 { scroll-margin-top: 48px; }
   container-type: inline-size;
 }
 @media (max-width: 640px) { .page { --page-x: 32px; } }
-/* Preview: no vertical frame lines; the rules still end where they were. */
 .page .site-nav,
 .container > .sec { position: relative; }
 .page .site-nav::after,
 .container > .sec::before,
 .wa-project-details::before, .case-project-details::before,
 .wa-project-details::after, .case-project-details::after {
-  content: "";
+  content: none; /* Preview: no frame lines at all. */
   position: absolute;
   /* Rules end on the two vertical frame lines, never past them. cqw is the
      page's content width, so the page edge sits a further --page-x outside it.
