@@ -189,4 +189,17 @@
   .ss-preview .ss-tab-num { display: inline; flex: none; width: 28px; font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace; font-size: 13px; font-variant-numeric: tabular-nums; }
   .ss-preview .wa-preview-panel { grid-column: 2; grid-row: 1; }
 }
+/* Auto-advance: the active tab's line fills as its recording plays (set by cretile-overview.js). */
+.ss-preview.is-auto .wa-preview-tabs button[aria-selected="true"] {
+  border-bottom-color: transparent;
+  background: linear-gradient(var(--ink), var(--ink)) left bottom / calc(var(--progress, 0) * 100%) 2px no-repeat;
+}
+@media (min-width: 901px) {
+  .ss-preview.is-auto .wa-preview-tabs button { padding: 10px 0 12px; }
+  .ss-preview.is-auto .wa-preview-tabs button[aria-selected="true"] {
+    background:
+      linear-gradient(var(--ink), var(--ink)) left bottom / calc(var(--progress, 0) * 100%) 1.5px no-repeat,
+      linear-gradient(var(--hairline), var(--hairline)) left bottom / 100% 1.5px no-repeat;
+  }
+}
 @media (min-width: 901px) and (prefers-reduced-motion: reduce) { .ss-preview .wa-preview-tabs button::after { transition: none; } }

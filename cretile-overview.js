@@ -92,6 +92,42 @@
         });
       });
       if (focus) tabs[index].focus();
+      if (autoAdvance) startView(index);
+    }
+
+    // Opt-in: each view plays its recording once, then hands over to the next, looping.
+    // The active tab's line fills with the recording; pausing it pauses the cycle.
+    var autoAdvance = gallery.hasAttribute('data-auto-advance') && !reducedMotion;
+    var strip = gallery.querySelector('[role="tablist"]');
+    var frame = 0;
+    function startView(index) {
+      var video = panels[index].querySelector('video');
+      tabs.forEach(function (tab) { tab.style.setProperty('--progress', '0'); });
+      if (video) video.currentTime = 0;
+      // Keep the active tab visible when the phone strip scrolls sideways.
+      var tabBox = tabs[index].getBoundingClientRect();
+      var stripBox = strip.getBoundingClientRect();
+      if (strip.scrollWidth > strip.clientWidth) strip.scrollTo({ left: strip.scrollLeft + tabBox.left - stripBox.left - (strip.clientWidth - tabBox.width) / 2, behavior: 'smooth' });
+    }
+    function trackProgress() {
+      cancelAnimationFrame(frame);
+      var index = tabs.findIndex(function (tab) { return tab.getAttribute('aria-selected') === 'true'; });
+      var video = panels[index] && panels[index].querySelector('video');
+      if (!video || !video.duration) return;
+      tabs[index].style.setProperty('--progress', String(video.currentTime / video.duration));
+      if (!video.paused && !video.ended) frame = requestAnimationFrame(trackProgress);
+    }
+    if (autoAdvance) {
+      gallery.classList.add('is-auto');
+      panels.forEach(function (panel, index) {
+        var video = panel.querySelector('video');
+        if (!video) return;
+        video.loop = false;
+        video.addEventListener('play', trackProgress);
+        video.addEventListener('ended', function () {
+          if (!panel.hidden) select((index + 1) % tabs.length, false);
+        });
+      });
     }
     tabs.forEach(function (tab, index) {
       tab.addEventListener('click', function () { select(index, false); });
