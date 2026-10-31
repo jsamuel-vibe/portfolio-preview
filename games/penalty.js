@@ -1,12 +1,13 @@
-// Penalty kicks for the footer game stage. Draws the goal, keeper and striker on the page background,
-// seen from behind the striker; tapping the goal shoots there. penalty-rules.js decides where the
+// Penalty kicks for the footer game stage. Draws the goal, keeper and striker on a mound of grass
+// on the page background, seen from behind the striker; tapping the goal shoots there. penalty-rules.js decides where the
 // keeper dives and whether a shot scores.
 (function () {
   var Rules = window.PenaltyRules;
   var RUNUP = 400, FLIGHT = 500, RESULT = 1000;
   var SIDE = { left: -1, centre: 0, right: 1 };
   var C = {
-    frame: '#111111', net: 'rgba(17, 17, 17, .14)', ground: 'rgba(17, 17, 17, .12)', muted: 'rgba(17, 17, 17, .6)',
+    frame: '#111111', net: 'rgba(17, 17, 17, .14)', muted: 'rgba(17, 17, 17, .6)', page: '#FFFFFF',
+    grass: '#7DB956', grassAlt: '#76B24F', line: 'rgba(255, 255, 255, .75)',
     keeper: '#F2683C', gloves: '#FFE14D', kit: '#1F2A44',
     striker: '#2F5BD3', skin: '#E0A37A', hair: '#2B1D14', ink: '#111111'
   };
@@ -34,8 +35,10 @@
       var gw = Math.min(W * (W < 560 ? 0.86 : 0.6), H * 1.2);
       var gh = gw / 3;
       var gy = H * 0.58;
+      // The grass is a half-ellipse rising from the bottom corners, tall enough that the posts stand on it.
+      var gry = (H - gy + gh * 0.08) / Math.sqrt(1 - Math.pow(gw / W, 2));
       return {
-        gw: gw, gh: gh, gx: (W - gw) / 2, gy: gy,
+        gw: gw, gh: gh, gx: (W - gw) / 2, gy: gy, gry: gry,
         bx: W / 2, by: gy + (H - gy) * 0.62, r0: gw * 0.028, r1: gw * 0.016
       };
     }
@@ -148,16 +151,33 @@
 
     // ---- Drawing ----
 
-    // No pitch: a faint goal line and the penalty spot are enough to stand on.
+    // A mound of grass on the page: soft mowing stripes, the goal line and the penalty spot.
     function drawGround() {
-      var g = L;
-      ctx.strokeStyle = C.ground;
-      ctx.lineWidth = Math.max(1.5, g.gw * 0.004);
-      ctx.lineCap = 'round';
+      var g = L, top = H - g.gry, i;
+      ctx.save();
       ctx.beginPath();
-      ctx.moveTo(g.gx - g.gw * 0.3, g.gy); ctx.lineTo(g.gx + g.gw * 1.3, g.gy);
+      ctx.ellipse(W / 2, H, W / 2, g.gry, 0, Math.PI, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      for (i = 0; i < 6; i++) {
+        var y0 = top + (H - top) * Math.pow(i / 6, 1.4);
+        var y1 = top + (H - top) * Math.pow((i + 1) / 6, 1.4);
+        ctx.fillStyle = i % 2 ? C.grassAlt : C.grass;
+        ctx.fillRect(0, y0, W, y1 - y0 + 1);
+      }
+      ctx.strokeStyle = C.line;
+      ctx.lineWidth = Math.max(1.5, g.gw * 0.005);
+      ctx.beginPath();
+      ctx.moveTo(0, g.gy); ctx.lineTo(W, g.gy);
       ctx.stroke();
-      ctx.fillStyle = C.ground;
+      // Fade the flat bottom edge into the page rather than cutting it off.
+      var fade = ctx.createLinearGradient(0, H - (H - g.gy) * 0.35, 0, H);
+      fade.addColorStop(0, 'rgba(255, 255, 255, 0)');
+      fade.addColorStop(1, C.page);
+      ctx.fillStyle = fade;
+      ctx.fillRect(0, H - (H - g.gy) * 0.35, W, H);
+      ctx.restore();
+      ctx.fillStyle = C.line;
       ctx.beginPath();
       ctx.ellipse(g.bx, g.by + g.r0 * 0.8, g.r0 * 0.5, g.r0 * 0.2, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -178,6 +198,8 @@
           else ctx.moveTo(p[0], p[1]);
         }
       }
+      ctx.fillStyle = C.page;
+      ctx.fillRect(g.gx, top, g.gw, g.gh);
       ctx.strokeStyle = C.net;
       ctx.lineWidth = 1;
       ctx.beginPath();
