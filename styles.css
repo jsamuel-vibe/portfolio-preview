@@ -555,16 +555,28 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .wa-summary-copy .t-body,
 .case-title-block > .t-body,
 .case-summary-copy .t-body { font-size: 16px; line-height: 1.5; }
-/* Project details run as one row between two hairlines, under the title. */
+/* Project details run as one row under the title, between two full-width
+   frame rules drawn like the section rules so they cross the frame lines. */
 .wa-project-details, .case-project-details {
+  position: relative;
   margin: 0;
   padding: 24px 0;
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 20px 32px;
 }
+.wa-project-details::before, .case-project-details::before,
+.wa-project-details::after, .case-project-details::after {
+  content: "";
+  position: absolute;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  height: 1px;
+  background: var(--frame-line);
+  pointer-events: none;
+}
+.wa-project-details::before, .case-project-details::before { top: 0; }
+.wa-project-details::after, .case-project-details::after { bottom: 0; }
 .wa-project-details > div, .case-project-details > div {
   display: flex;
   flex-direction: column;
