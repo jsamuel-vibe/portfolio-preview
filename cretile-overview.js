@@ -40,21 +40,19 @@
     syncPlayback();
   });
 
-  // Old shared links still reach the corresponding section on the full page.
+  // Old shared links still reach the corresponding section, now on the same page.
   if (document.body.classList.contains('wa-overview')) {
     var destinations = {
-      'design-story': 'story', scenarios: 'design-process', strategy: 'why',
-      audience: 'audience', launch: 'shipped', 'reply-state': 'shipped',
+      'design-story': 'why', story: 'why', scenarios: 'design-process', strategy: 'why',
+      launch: 'shipped', 'reply-state': 'shipped',
       analytics: 'shipped', 'follow-up': 'automation', product: 'shipped',
       direction: 'next', takeaway: 'reflection', built: 'audience', goal: 'scope'
     };
     function followLegacyLink() {
       var id;
       try { id = decodeURIComponent(window.location.hash.slice(1)); } catch (_) { return; }
-      if (!Object.prototype.hasOwnProperty.call(destinations, id)) return;
-      var destination = new URL('cretile-case-study.html', window.location.href);
-      destination.hash = destinations[id];
-      window.location.replace(destination.href);
+      if (!Object.prototype.hasOwnProperty.call(destinations, id) || document.getElementById(id)) return;
+      window.location.replace('#' + destinations[id]);
     }
     followLegacyLink();
     window.addEventListener('hashchange', followLegacyLink);

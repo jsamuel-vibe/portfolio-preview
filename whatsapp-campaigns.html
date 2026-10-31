@@ -21,14 +21,14 @@
 <link rel="stylesheet" href="styles.css?v=20261031-frame5">
 <link rel="stylesheet" href="cretile-overview.css?v=20261031-frame5">
 </head>
-<body class="wa-case wa-overview" id="top">
+<body class="wa-case wa-overview wa-story" id="top">
 <a class="wa-skip" href="#overview">Skip to content</a>
 <main class="page"><div class="container">
 <header class="site-nav">
       <a class="site-portrait-link" href="index.html" aria-label="Samuel Joseph, home"><img class="site-portrait" src="assets/profile.jpg" alt="Samuel Joseph" width="56" height="56"></a>
       <a class="btn btn-primary" href="#contact">Get in touch</a>
     </header>
-    <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">WhatsApp overview</li></ol></nav>
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="index.html">Home</a></li><li aria-current="page">WhatsApp campaigns</li></ol></nav>
 <header class="project-intro wa-project-opening" id="overview"><div class="project-intro-inner wa-opening-inner">
 <figure class="media-figure wa-story-media">
   <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-workspace-redacted.webp" width="1140" height="600" alt="Cretile campaign workspace with campaign history, drafts and sending status" fetchpriority="high"></div></div>
@@ -37,7 +37,7 @@
 <dl class="wa-project-details"><div><dt>Role</dt><dd>Product designer</dd></div><div><dt>Scope</dt><dd>Product definition, workflow design, UX/UI and development with Claude</dd></div><div><dt>Team</dt><dd>Founders and sales</dd></div><div><dt>Timeline</dt><dd>Two weeks for the first release</dd></div><div><dt>Status</dt><dd>Live internal product</dd></div></dl>
 <div class="wa-summary"><h2 class="t-h16">Long story short</h2><div class="wa-summary-copy"><p class="t-body">We needed to restart WhatsApp campaigns after losing access to our old Meta account. We also wanted more control over a sales workflow spread across Excel and other tools.</p>
 <p class="t-body">I helped define the larger direction, then designed and built the first WhatsApp module. I explored workflows in existing marketing tools and with Claude, using everyday campaign tasks to decide how the parts should fit together. The live product connects contacts, campaigns, replies and reporting, with room to add company-specific automation.</p></div></div></div></div></div></header>
-<section class="sec wa-overview-section" id="outcomes"><div class="wa-section-head"><h2 class="t-h24">What happened after launch.</h2></div><div class="wa-results-grid"><article><h3 class="t-h16">Campaigns and conversations in one product.</h3><p class="t-body">I run campaigns; a salesperson uses the inbox to reply. My colleague's feedback was that the app was easy to use.</p></article>
+<section class="sec wa-overview-section" id="outcomes"><div class="wa-section-head"><h2 class="t-h24">What happened after launch.</h2></div><div class="wa-results-grid"><article><h3 class="t-h16">Campaigns and conversations in one product.</h3><p class="t-body">I run campaigns; a salesperson uses the inbox to reply. My colleague's feedback was that the app was easy to use. That is encouraging, but it is not a usability study.</p></article>
 <article><h3 class="t-h16">Roughly 40 follow-ups handled through Claude.</h3><p class="t-body">In one campaign, Claude sent the relevant follow-up when a person chose one of four support options, without me monitoring each reply as it arrived.</p></article>
 <article><h3 class="t-h16">About ₹15–27K a year in projected avoided provider charges.</h3><p class="t-body">An estimate based on three monthly campaigns to 4,000 contacts. This is not measured savings or a net return; Meta messaging charges, development and hosting costs still need to be paid.</p></article></div></section>
 <section class="sec wa-overview-section" id="preview"><div class="wa-section-head"><h2 class="t-h24">Take a look inside the app.</h2><p class="t-body">Contacts, campaign creation, the inbox and campaign results. Choose a view or open a screenshot full screen.</p></div><div class="wa-preview-gallery" data-product-preview><div class="wa-preview-tabs" role="tablist" aria-label="Product screens and recordings"><button type="button" role="tab" id="preview-tab-workspace" aria-controls="preview-workspace" aria-selected="true" tabindex="0">Workspace</button>
@@ -52,7 +52,65 @@
 <figure class="wa-preview-panel media-figure" role="tabpanel" id="preview-campaign" aria-labelledby="preview-tab-campaign" tabindex="0"><div class="wa-preview-surface"><video class="media" src="assets/wa-preview-clean.mp4" poster="assets/wa-preview-poster-clean.webp" width="1424" height="750" controls muted loop playsinline preload="metadata" aria-label="Template selection and the WhatsApp message preview"></video></div><figcaption class="media-caption">Template selection and message preview in the live campaign flow.</figcaption></figure>
 <figure class="wa-preview-panel media-figure" role="tabpanel" id="preview-inbox" aria-labelledby="preview-tab-inbox" tabindex="0"><div class="wa-preview-surface"><img class="media" src="assets/wa-inbox-redacted.webp" width="1900" height="1000" alt="Customer inbox with a closed reply window and approved-template action" loading="lazy"></div><figcaption class="media-caption">The salesperson can see the conversation and the available reply action. Private details are hidden.</figcaption></figure>
 <figure class="wa-preview-panel media-figure" role="tabpanel" id="preview-results" aria-labelledby="preview-tab-results" tabindex="0"><div class="wa-preview-surface"><img class="media" src="assets/wa-analytics-redacted.webp" width="1900" height="1000" alt="Campaign results with separate delivery states and resend action" loading="lazy"></div><figcaption class="media-caption">Results distinguish accepted, delivered, read, replied and failed messages.</figcaption></figure></div></section>
-<section class="sec wa-learn-more" id="learn-more"><div><span class="wa-eyebrow">The full case study</span><h2 class="t-h24">Why we built it, and how I approached the first release.</h2><p class="t-body">The starting problem, workflow exploration, product choices and what I learned.</p></div><a class="wa-learn-more-link" href="cretile-case-study.html">Learn More</a></section>
+<section class="wa-story-section sec" id="why"><h2 class="wa-story-label">Why we started</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">We had to restart campaigns. We also had a reason to reconsider the setup.</h3>
+<p class="t-body">After several unsuccessful attempts to recover our old Meta account, we registered a new account and WhatsApp number. We had disconnected Interakt and needed to resume campaigns.</p>
+<p class="t-body">There was a cost motivation too. A colleague told me WhatsApp messages were supposed to be free, so we initially believed building our own tool could remove the per-message fee as well as the subscription. After development began, I checked this with Claude and learned that Meta charged for the messages. Owning the tool would not make them free.</p>
+<p class="t-body">We continued because the plan was bigger than replacing a subscription. We wanted a product we could extend around Cretile's work, eventually connecting our Excel data and more of the sales process. I worked with the founders and sales to understand that direction and align on what to build.</p>
+<h3 class="t-h24">Our contact data still needed preparation before each campaign.</h3>
+<p class="t-body">Our leads lived in Excel, and the sheets changed as new people were added. Before a campaign, I would export the updated data and upload it to the campaign tool again.</p>
+<p class="t-body">Choosing a particular audience could mean more preparation. In the Interakt workflow I used, a school-only campaign meant preparing a school-only file, uploading it and assigning a tag so I could select that group.</p>
+<p class="t-body">That experience gave me a practical starting point: understand how people would bring their data into the product and use it, rather than design campaign screens in isolation.</p></div></div></section>
+<section class="wa-story-section sec" id="scope"><h2 class="wa-story-label">Defining the first release</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">Start with the work we needed to resume.</h3>
+<p class="t-body">Building an entire CRM was too broad for our resources and our understanding of that wider product. WhatsApp campaigns were familiar work with an immediate need.</p>
+<p class="t-body">We already had a way to send messages, but that setup had no inbox for customers' replies. Sending alone would leave the salesperson without a way to continue the conversation there.</p>
+<p class="t-body">I scoped the first version around importing and exporting contacts, creating campaigns, checking results, retrying failed messages and replying through an inbox. Once the objective and plan were aligned, I proposed two weeks for the first release, which the team agreed to.</p>
+<p class="t-body">Excel synchronisation remained outside the first version. Imported data could be used in the app, but changes to the source spreadsheet would still require another upload.</p></div></div></section>
+<section class="wa-story-section sec" id="design-process"><h2 class="wa-story-label">Design process</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">I explored different workflows against the situations our team would face.</h3>
+<p class="t-body">I tried email and WhatsApp marketing products, including ConvertKit, Mailchimp and Interakt, to understand how they organised the work. With Claude, I generated multiple workflow options and considered which would be clearest for our use cases.</p>
+<p class="t-body">As I compared them, I imagined my colleagues working through the app: what they would be trying to do, what information they would have and which steps would need explaining.</p>
+<p class="t-body">Adding one contact, for example, should not require preparing a spreadsheet. I provided a manual-entry route alongside file upload. For larger imports, the challenge was different: preserve the useful information already in the sheet and make it available for later work.</p></div></div><figure class="media-figure wa-story-media">
+  <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-add-contacts-method.webp" width="1904" height="1016" alt="Add contacts screen offering file upload or manual entry" loading="lazy"></div></div>
+  <figcaption class="media-caption">Different tasks have different starting points: upload a file or add a contact manually.</figcaption>
+</figure></section>
+<section class="wa-story-section sec" id="audience"><h2 class="wa-story-label">From spreadsheet to campaign audience</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">Importing contacts needed to preserve more than names and phone numbers.</h3>
+<p class="t-body">The mapping options in the Interakt workflow I used did not give me the flexibility I wanted for our sheets. Those sheets could contain information about the organisation, customer type or source of a lead.</p>
+<p class="t-body">I designed the import flow so columns could be matched to standard fields or existing custom fields. If information did not fit those fields, the operator could create a new one. Unneeded columns could be left out, and a tag could identify the imported batch.</p>
+<p class="t-body">This let the team bring useful context into the product without being limited to a fixed set of fields.</p></div><figure class="media-figure wa-story-media">
+  <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-import-mapping-redacted.webp" width="1904" height="1016" alt="Real import screen showing custom mapping choices" loading="lazy"></div></div>
+  <figcaption class="media-caption">The real mapping interface, with source values hidden and column labels anonymised.</figcaption>
+</figure>
+  <div class="wa-story-copy"><h3 class="t-h24">Choosing recipients should not mean preparing another file.</h3>
+<p class="t-body">For campaign creation, I provided an entire-audience option and a segment/tag option. An operator could choose an existing group, exclude another group or adjust individual recipients for that campaign without changing their contact records.</p>
+<p class="t-body">The contacts page also supported selecting people directly and starting a campaign from that selection. A one-off audience did not have to become a permanent tag.</p>
+<p class="t-body">These choices addressed different situations: working with everyone, reusing a group and contacting a few specific people. The aim was to let the operator work with contacts already held in the app, rather than make a separate upload the starting point for every audience.</p></div>
+  <figure class="media-figure wa-story-media">
+  <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-campaign-audience-redacted.webp" width="1904" height="1016" alt="Campaign audience selection with entire-audience and segment/tag options" loading="lazy"></div></div>
+  <figcaption class="media-caption">Choose an existing group for the campaign. Group names are anonymised.</figcaption>
+</figure>
+  <figure class="media-figure wa-story-media">
+  <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-contacts-story.webp" width="1900" height="1000" alt="Direct contact selection with Create campaign available" loading="lazy"></div></div>
+  <figcaption class="media-caption">Selected contacts can also become a campaign audience. Names and phone numbers are anonymised.</figcaption>
+</figure></div></section>
+<section class="wa-story-section sec" id="shipped"><h2 class="wa-story-label">What shipped</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">A campaign no longer ended at the send.</h3>
+<p class="t-body">The live product connects contact management, campaign creation, an inbox and reporting. I use it to create and run campaigns; one salesperson uses it to respond to customers.</p>
+<p class="t-body">Campaign setup brings the audience, template and send time together. The inbox shows the conversation's reply-window status and the available next action. Reporting separates accepted, delivered, read, replied and failed messages, helping me tell the team what happened and retry contacts we could not reach.</p></div></div><div class="wa-story-media-pair"><figure class="media-figure wa-story-media">
+  <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-inbox-redacted.webp" width="1900" height="1000" alt="Real inbox showing the conversation and closed reply-window state" loading="lazy"></div></div>
+  <figcaption class="media-caption">The inbox gives sales a place to continue conversations. Identifying details and message content are hidden.</figcaption>
+</figure><figure class="media-figure wa-story-media">
+  <div class="interface-stage"><div class="interface-viewport"><img class="media" src="assets/wa-analytics-redacted.webp" width="1900" height="1000" alt="Actual campaign report with delivery outcomes and a retry action" loading="lazy"></div></div>
+  <figcaption class="media-caption">Campaign results show what happened and who could not be reached.</figcaption>
+</figure></div><div class="wa-story-media-pair"><figure class="media-figure"><div class="wa-preview-surface"><video class="media" src="assets/wa-preview-clean.mp4" poster="assets/wa-preview-poster-clean.webp" width="1424" height="750" controls muted loop playsinline preload="metadata" aria-label="Campaign setup: selecting a template and reviewing the message."></video></div><figcaption class="media-caption">Campaign setup: selecting a template and reviewing the message.</figcaption></figure><figure class="media-figure"><div class="wa-preview-surface"><video class="media" src="assets/wa-undo-clean.mp4" poster="assets/wa-undo-poster-clean.webp" width="1424" height="750" controls muted loop playsinline preload="metadata" aria-label="The final sending state in the live campaign workflow."></video></div><figcaption class="media-caption">The final sending state in the live campaign workflow.</figcaption></figure></div></section>
+<section class="wa-story-section sec" id="automation"><h2 class="wa-story-label">What owning the workflow enabled</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">I could arrange the follow-up without monitoring every reply.</h3>
+<p class="t-body">One campaign asked people to choose from four ways Cretile could help. Each choice needed a different response.</p>
+<p class="t-body">I connected the app to Claude and asked it to send the relevant follow-up when someone selected an option. Roughly 40 people received a follow-up through that workflow.</p>
+<p class="t-body">I do not have a measured time saving. The practical difference was that I did not need to stay available and open each conversation as replies arrived. It was a concrete example of adapting the product to a Cretile-specific task.</p></div></div></section>
+<section class="wa-story-section sec" id="next"><h2 class="wa-story-label">What comes next</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">Connect the spreadsheet so updates do not need another upload.</h3>
+<p class="t-body">The next version should connect to our Excel source so new contacts can enter the app without another export and upload. That would address a repeated task the current release still leaves with the operator.</p>
+<p class="t-body">The longer-term direction is to connect more of Cretile's sales work in the same product. That remains a direction, not a claim about what has already shipped.</p></div></div></section>
+<section class="wa-story-section sec" id="reflection"><h2 class="wa-story-label">What I learned</h2><div class="wa-story-content"><div class="wa-story-copy"><h3 class="t-h24">The larger vision helped define where to start.</h3>
+<p class="t-body">We wanted a broader internal platform, but the first release needed to do a smaller job completely. Building around campaigns and replies gave us a usable starting point while leaving the wider CRM for later.</p>
+<p class="t-body">I should have checked the pricing assumption before development began. The more useful evidence for continuing was what the product could support in practice: working with our existing data, connecting campaign tasks and enabling follow-up tailored to the team.</p>
+<p class="t-body">The next question is whether further development removes enough recurring work to justify the effort of owning and maintaining the product.</p></div></div></section>
     <section class="sec">
       <a class="next-project" href="superstash.html">
         <div class="next-text">
@@ -83,4 +141,4 @@
       <p class="t-small muted contact-note">© 2026 Samuel Joseph</p>
     </footer>
 
-</div></main><script src="cretile-overview.js?v=20261029-controls"></script><script src="site.js?v=20261029-overview"></script></body></html>
+</div></main><script src="cretile-overview.js?v=20261031-onepage"></script><script src="site.js?v=20261029-overview"></script></body></html>
