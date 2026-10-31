@@ -71,8 +71,9 @@ h2, h3 { scroll-margin-top: 48px; }
 .container { max-width: var(--content-width); margin: 0 auto; }
 
 /* Page frame: two vertical lines a little outside the content column,
-   crossed by full-width rules at the main breaks (under the header, above
-   the footer). Drawn behind the content so they never cover media. */
+   crossed by full-width rules. The same rule places them on every page:
+   24px under the header, then halfway into the gap above each section.
+   Drawn behind the content so they never cover media. */
 .page {
   --frame-x: max(12px, (100% - var(--content-width)) / 2 - 40px);
   --frame-line: rgba(17, 17, 17, 0.08);
@@ -85,21 +86,25 @@ h2, h3 { scroll-margin-top: 48px; }
   border-inline: 1px solid var(--frame-line);
   pointer-events: none;
 }
-.page .site-nav { position: relative; }
-.page .site-nav::after {
+.page .site-nav,
+.container > .sec { position: relative; }
+.page .site-nav::after,
+.container > .sec::before {
   content: "";
   position: absolute;
-  top: calc(100% + var(--nav-rule-gap, 24px));
   left: calc(50% - 50vw);
   width: 100vw;
   height: 1px;
   background: var(--frame-line);
   pointer-events: none;
 }
-.contact > .rule { margin-inline: calc(50% - 50vw); background: var(--frame-line); }
+.page .site-nav::after { top: calc(100% + 24px); }
+.container > .sec::before { top: calc(var(--sec-pad) / 2); }
+/* The footer's frame rule replaces its old divider; the divider keeps its space. */
+.contact > .rule { visibility: hidden; }
 
 /* Spacing */
-.sec { padding-top: var(--section-gap); }
+.sec { --sec-pad: var(--section-gap); padding-top: var(--sec-pad); }
 .sec-tight { padding-top: var(--block-gap); }
 
 /* Type */
