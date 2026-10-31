@@ -87,6 +87,7 @@ h2, h3 { scroll-margin-top: 48px; }
 .page {
   --frame-x: max(var(--page-x) / 2, (100% - var(--content-width)) / 2 - 40px);
   --frame-line: rgba(31, 31, 31, 0.08);
+  container-type: inline-size;
 }
 @media (max-width: 640px) { .page { --page-x: 32px; } }
 .page::before {
@@ -569,8 +570,11 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .wa-project-details::after, .case-project-details::after {
   content: "";
   position: absolute;
-  left: calc(50% - 50vw);
-  width: 100vw;
+  /* Spans exactly between the two vertical frame lines: cqw is the page's
+     content width, so the page edge sits a further --page-x outside it. */
+  --half-frame: calc(50cqw + var(--page-x) - max(var(--page-x) / 2, (100cqw + 2 * var(--page-x) - var(--content-width)) / 2 - 40px));
+  left: calc(50% - var(--half-frame));
+  width: calc(2 * var(--half-frame));
   height: 1px;
   background: var(--frame-line);
   pointer-events: none;
@@ -580,7 +584,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-o
 .wa-project-details > div, .case-project-details > div {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
 }
 /* The row's bottom hairline already opens the summary. */
 .wa-project-details + .wa-summary,
